@@ -1,0 +1,118 @@
+<div class="col-12 mb-n2">
+    <div class="default-link card card-style" style="height:50px">
+        <div class="card-center text-center">
+            <div class="form-custom form-label form-border">
+                <img src="{{newpay.image}}" width="25" class="rounded-s" alt="img">
+                <select class="color-blue-dark exchange-select rounded-xs border-0">
+                    <option value="0" selected=""> {{newpay.symbol | uppercase}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card card-style mt-3">
+    <div class="content">
+        <div class="tabs tabs-pill" id="tab-group-2">
+            <div class="tab-controls rounded-m p-1 overflow-visible">
+                <span class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" data-bs-target="#tab-4" aria-expanded="true">UPI</span>
+                <span class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" data-bs-target="#tab-5" aria-expanded="false">IMPS</span>
+                <span class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" data-bs-target="#tab-6" aria-expanded="false">Paytm</span>
+            </div>
+            <div class="mt-3"></div>
+
+            <div *ngIf="!loging" class="collapse show" id="tab-4" data-bs-parent="#tab-group-2">
+                <div>
+                    <ul>
+                        <li>MAK-DFS is holding the seller's crypto in the escrow account</li>
+                        <li>MAK-DFS 24/7 customer support</li>
+                    </ul>
+                </div>
+                <div *ngFor="let item of upivd; index as i;">
+                    <div class="d-flex" (click)="recever(item.paymentType,item)" routerLink="/wallet/pay-details">
+                        <div class="align-self-center">
+                            <span class="icon rounded-s me-2 shadow-bg shadow-bg-xs oricon" [class.gradient-green]="(i+1)%1==0" [class.gradient-red]="(i+1)%2==0" [class.gradient-orange]="(i+1)%3==0">
+                                <span class="color-white">{{(item.accountid.split(",")[1]).substring(0, 1)}}</span>
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.accountid.split(",")[1]}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1"><strong>Quantity: </strong> $ {{((item.quantity*1)-(item.selled*1)).toFixed(2)}}</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end">
+                                <b>Completion</b><span> {{(item.completation*1).toFixed(2)}}%</span> 
+                            </span>
+                            <h1 class="mb-0 mt-n2 font-16 text-end">$ {{(newpay.amount*1).toFixed(2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+            </div>
+
+            <div *ngIf="!loging" class="collapse" id="tab-5" data-bs-parent="#tab-group-2">
+                <div>
+                    <ul>
+                        <li>MAK-DFS is holding the seller's crypto in the escrow account</li>
+                        <li>MAK-DFS 24/7 customer support</li>
+                    </ul>
+                </div>
+                <div *ngFor="let item of ifscvd; index as i;">
+                    <div class="d-flex" (click)="recever(item.paymentType,item)" routerLink="/wallet/pay-details">
+                        <div class="align-self-center">
+                            <span class="icon rounded-s me-2 shadow-bg shadow-bg-xs oricon" [class.gradient-green]="(i+1)%1==0" [class.gradient-red]="(i+1)%2==0" [class.gradient-orange]="(i+1)%3==0">
+                                <span class="color-white">{{(item.accountid.split(",")[1]).substring(0, 1)}}</span>
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.accountid.split(",")[1]}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1"><strong>Quantity: </strong> $ {{((item.quantity*1)-(item.selled*1)).toFixed(2)}}</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end">
+                                <b>Completion</b><span> {{(item.completation*1).toFixed(2)}}%</span> 
+                            </span>
+                            <h1 class="mb-0 mt-n2 font-16 text-end">$ {{(newpay.amount*1).toFixed(2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+            </div>
+            
+            <div *ngIf="!loging" class="collapse" id="tab-6" data-bs-parent="#tab-group-2">
+                <div>
+                    <ul>
+                        <li>MAK-DFS is holding the seller's crypto in the escrow account</li>
+                        <li>MAK-DFS 24/7 customer support</li>
+                    </ul>
+                </div>
+                <div *ngFor="let item of patmvd; index as i;">
+                    <div class="d-flex" (click)="recever(item.paymentType,item)" routerLink="/wallet/pay-details">
+                        <div class="align-self-center">
+                            <span class="icon rounded-s me-2 shadow-bg shadow-bg-xs oricon" [class.gradient-green]="(i+1)%1==0" [class.gradient-red]="(i+1)%2==0" [class.gradient-orange]="(i+1)%3==0">
+                                <span class="color-white">{{(item.accountid.split(",")[1]).substring(0, 1)}}</span>
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.accountid.split(",")[1]}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1"><strong>Quantity: </strong> $ {{((item.quantity*1)-(item.selled*1)).toFixed(2)}}</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end">
+                                <b>Completion</b><span> {{(item.completation*1).toFixed(2)}}%</span> 
+                            </span>
+                            <h1 class="mb-0 mt-n2 font-16 text-end">$ {{(newpay.amount*1).toFixed(2)}}</h1>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+            </div>
+            
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

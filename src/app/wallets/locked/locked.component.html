@@ -1,0 +1,130 @@
+<div class="px-3">
+    <div class="splide__slide">
+        <div class="card card-style m-0 bg-1 shadow-card shadow-card-m" style="height:200px">
+            <div class="card-center">
+                <div class="bg-theme px-3 py-2 rounded-end d-inline-block">
+                    <h1 class="font-13 my-n1">
+                        <span class="color-theme">Investment Balance</span>
+                    </h1>
+                    <div class="collapse show">
+                        <h2 class="color-theme font-26">{{orgnigation.cuntryCurency(loanAmount)}}</h2>
+                    </div>
+                </div>
+            </div>
+            <strong class="card-top no-click font-12 p-3 color-white font-monospace">Assured <span style="font-size: 18px;">24%</span> return</strong>
+            <strong class="card-bottom no-click p-3 text-start color-white font-monospace">Wallet ID: {{user.userid}}</strong>
+            <div class="card-overlay bg-black opacity-50"></div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2">
+        <span routerLink="/wallet/mak-wallet" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Invest Now
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Using Open Wallet
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<!-- <div *ngIf="transaction.length>0" class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2 text-center">
+        <span (click)="getLoan()" routerLink="/loan/home">
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-1 mt-1 font-14 line-height-s">
+                    Get interest free loan on your investment.
+                </h5>
+            </div>
+        </span>
+    </div>
+</div> -->
+
+<div class="card card-style mt-3">
+    <div class="content">
+        <div class="collapse show">
+            <div>
+                <div class="d-flex pt-1">
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">MAK || MAKDFS</h5>
+                        <p class="mb-0 font-11 opacity-70">Locked</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-green-dark">{{orgnigation.cuntryCurency(loanAmount)}}</h4>
+                        <p class="mb-0 font-11">{{totalCoin}}</p>
+                    </div>
+                </div>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+
+            <div *ngFor="let item of transaction; index as i;" >
+                <div (click)="details(i)" class="d-flex pt-1">
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1 orlock">Locked <label>360-Day</label></h5>
+                        <p class="mb-0 font-11 opacity-70">{{item.datetime | date: 'dd-MM-yyyy hh:mm a'}}</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-green-dark font-16"><i class="bi  pe-2 bi-caret-up-fill"></i>{{(item.makAmnt*1)}}</h4>
+                        <p class="mb-0 font-11">{{(item.makAmnt*1)}}</p>
+                    </div>
+                </div>
+                <p class="m-0 font-11 opacity-70"><strong class="font-12" [class.text-danger]="item.status=='Redeem Early'" [class.text-warning]="item.status=='Pending'" [class.text-success]="item.status=='Active'">{{item.status}}</strong> | <strong class="font-12 text-success"><!-- {{item.value}} -->24% APR</strong></p>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            
+            <div *ngIf="nodata.length>0" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/no-data.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card card-style">
+    <div class="content">
+        <div class="collapse show">
+            <div *ngFor="let item of transaction; index as i;">
+                <div class="d-flex pt-1">
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">{{item.sellerid.split(",")[1]}}</h5>
+                        <p class="mb-0 font-11 opacity-70">{{item.datetime | date: 'dd-MM-yyyy hh:mm a'}}</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-red-dark">${{(item.usdamnt*1).toFixed(2)}}</h4>
+                        <p class="mb-0 font-11">₹{{(item.transferant*1).toFixed(2)}}</p>
+                    </div>
+                </div>
+                <p class="m-0 font-11 opacity-70"><strong class="font-14" [class.text-warning]="item.status=='Pending'" [class.text-success]="item.status=='Confirm'">{{item.status}}</strong> | {{item.remark}}</p>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            <div *ngIf="nodata.length>0" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/no-data.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+ -->

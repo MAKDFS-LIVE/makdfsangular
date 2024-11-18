@@ -1,0 +1,233 @@
+<div class="">
+    <div class="content">
+        <div class="tabs tabs-pill" id="tab-group-2">
+            <div class="tab-controls rounded-m p-1 overflow-visible">
+                <span #listed class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" data-bs-target="#tab-4" aria-expanded="true">Listed</span>
+                <span class="font-13 rounded-m shadow-bg shadow-bg-s" data-bs-toggle="collapse" data-bs-target="#tab-5" aria-expanded="false">Sell</span>
+            </div>
+            <div class="mt-3"></div>
+
+            <div class="collapse show" id="tab-4" data-bs-parent="#tab-group-2">
+                <div *ngFor="let item of sellar; index as i;">
+                    <div class="d-flex">
+                        <div class="align-self-center">
+                            <span class="icon rounded-s me-2 shadow-bg shadow-bg-xs oricon" [class.gradient-green]="(i+1)%1==0" [class.gradient-red]="(i+1)%2==0" [class.gradient-orange]="(i+1)%3==0">
+                                <span class="color-white">{{item.paymentType.substring(0, 1)}}</span>
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.paymentType}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1"><strong>Quantity: </strong> $ {{(item.quantity*1).toFixed(2)}} <span class="font-8"> || ₹ {{(item.quantity*mak).toFixed(2)}}</span></h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end">
+                                <b>Selled</b><span> {{((item.selled/item.quantity)*100).toFixed(2)}}%</span>
+                            </span>
+                            <h3 class="mb-0 mt-n2 font-14 text-end">$ {{(item.selled*1).toFixed(2)}} <span class="font-8"> || ₹ {{(item.selled*mak).toFixed(2)}}</span></h3>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+                <div *ngIf="loging" class="py-5">
+                    <div class="text-center ptb-50">
+                        <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                    </div>
+                </div>
+                <div *ngIf="nodata.length>0" class="py-5 text-center">No any payment listed at this time</div>
+            </div>
+
+            <div class="collapse" id="tab-5" data-bs-parent="#tab-group-2">
+               
+                    <div class="card card-style">
+                        <div class="content">
+                            <p class="mb-3">
+                                <strong class="text-success">Secure payment</strong> - a unique payment processing.
+                            </p>
+                            <ul class="icon-list">
+                                <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>We will notify once a buyer buy your coin</li>
+                                <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>You can get maximum 30 mint</li>
+                                <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Only use your account to get funds</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div *ngIf="openMakAmount>0 && (!convert)" class="px-3">
+                        <div class="splide__slide">
+                            <div class="card card-style mb-3 mx-0">
+                                <div class="content pb-0">
+                                    <div class="d-flex">
+                                        <div class="ps-1">
+                                            <h3 class="font-16 mb-0">Open MAK</h3>
+                                        </div>
+                                        <div class="ms-auto text-end pr-2">
+                                            <h3 class="mb-0 font-16">{{openMakAmount.toFixed(2)}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="selmsg">You can sell your mak by converting in USDT</p>
+                                        <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 wd150 pointer">
+                                            <div class="content my-2">
+                                                <span (click)="convert=true" class="d-flex">
+                                                    <div class="align-self-center w-100">
+                                                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                                            Convert Now
+                                                        </h5>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="convert" class="px-3">
+                        <div class="splide__slide">
+                            <div class="card card-style mb-3 mx-0">
+                                <div class="content pb-0">
+                                    <div class="d-flex">
+                                        <div class="ps-1">
+                                            <h3 class="font-16 mb-0">Open MAK</h3>
+                                        </div>
+                                        <div class="ms-auto text-end pr-2">
+                                            <h3 class="mb-0 font-16">{{openMakAmount.toFixed(2)}}</h3>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="row mt-3"  [formGroup]="convertdata">
+                                        <div class="col-5">
+                                            <div class="form-custom form-label form-border">
+                                                <div class="form-custom form-label">
+                                                    <input formControlName="convAmount" type="number" [(ngModel)]="convAmount" class="form-control exchange-value border-0 rounded-xs usdAmnt" placeholder="00.00">
+                                                </div>
+                                            </div>
+                                            <label class="text-success cndoler">$ {{((convAmount * curency[0].current_price)).toFixed(2)}}</label>
+                                        </div>
+                                        <div class="col-2 pt-2">
+                                            <label class="text-info pointer" (click)="convAmount = openMakAmount">MAX</label>
+                                        </div>
+                                        <div class="col-5 pt-2">
+                                            <div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 pointer">
+                                                <div class="content my-2">
+                                                    <span (click)="convertNow()" class="d-flex">
+                                                        <div class="align-self-center w-100">
+                                                            <label *ngIf="loading2"><img class="dup" src="assets/images/ar1.gif"/></label>
+                                                            <h5 *ngIf="!loading2" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">Convert</h5>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-3">
+                        <div class="splide__slide">
+                            <div class="card card-style mb-3 mx-0">
+                                <div class="content pb-0">
+                                    <div class="d-flex">
+                                        <div class="ps-1">
+                                            <h3 class="font-16 mb-0">Open USDT</h3>
+                                        </div>
+                                        <div class="ms-auto text-end pr-2">
+                                            <h3 class="mb-0 font-16">$ {{user.openWallet.toFixed(2)}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div [formGroup]="filldata">
+                    <div class="card card-style">
+                        <div class="content">
+                            <h6>Enter amount you want to sell</h6>
+                            <div class="row mt-n3">
+                                <div class="col-5">
+                                    <div class="form-custom form-label form-border">
+                                        <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                                            <option value="0" selected="">USD</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-custom form-label form-border">
+                                        <div class="form-custom form-label">
+                                            <input formControlName="amount" type="number" [(ngModel)]="usdAmnt" class="form-control exchange-value border-0 rounded-xs usdAmnt" placeholder="00.00">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <h5 class="exchange-arrow"><i class="bi bi-arrow-left-right"></i></h5>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-custom form-label form-border">
+                                        <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                                            <option value="0" selected="">INR</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-custom form-label form-border">
+                                        <div class="form-custom form-label">
+                                            <input type="number" [value]="(usdAmnt*mak).toFixed(2)" readonly class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+    
+                    <div class="row">
+                        <div class="col-10 pt-2">
+                            <div class="form-custom form-label form-border form-icon">
+                                <i class="bi bi-calendar font-13"></i>
+                                <label for="c6a" class="color-highlight form-label-always-active">Account where you want to get money</label>
+                                <select formControlName="accountType" class="form-select rounded-xs">
+                                    <option value="" selected="">Select Account</option>
+                                    <option *ngFor="let item of account; index as i;" value="{{item.id+','+item.paymentType}}">{{item.paymentType+" | "}} <span *ngIf="item.paymentType=='IMPS'">{{item.accountNo}}</span>  <span *ngIf="item.paymentType=='Paytm'">{{item.paytmNo}}</span>  <span *ngIf="item.paymentType=='UPI'">{{item.upiid}}</span> </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2 text-end pt-3">
+                            <div routerLink="/p2p/add-account" class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                                <i class="bi bi-plus-circle color-black pe-3"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <ul>
+                        <li>MAK-DFS is holding the seller's crypto in the escrow account</li>
+                        <li>MAK-DFS 24/7 customer support</li>
+                    </ul>
+                </div>
+
+                <div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3">
+                    <div class="content my-2">
+                        <span (click)="sellAmount()" class="d-flex">
+                            <div class="align-self-center">
+                                <h1 class="mb-0 font-14"><i class="bi bi-card-checklist color-white pe-3"></i></h1>
+                            </div>
+                            <div class="align-self-center">
+                                <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                                <h5 *ngIf="!loading" class="color-white font-600 mb-0 mt-0 font-14 line-height-s">Sell Now</h5>
+                            </div>
+                            <div class="align-self-center ms-auto">
+                                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                                    Tap to Sell
+                                </h5>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

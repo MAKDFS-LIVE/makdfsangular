@@ -1,0 +1,55 @@
+<div class="px-3">
+    <div class="card card-style p-3">
+        <div class="text-center">
+            <div class="mb-3">
+                <p class="mb-0 font-11 opacity-70">Scan via the Payment App to send</p>
+                <img width="250px" src="assets/images/qr.jpg" alt="QR">
+            </div>
+            <strong>Payment ID</strong>
+            <p class="mb-0 font-11 opacity-70">{{user.userid}}</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <strong></strong>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showrecpt" class="card card-style">
+    <div class="content">
+        <h5>Upload your payment receipt</h5>
+        <div class="row mt-2 text-center">
+            <div class="col-5">
+                <label for="recipt"><img height="80px" src="assets/images/upload.jpg" alt="upload"></label>
+                <input (change)="onselectfile($event)" class="d-none" id="recipt" type="file">
+            </div>
+            <div class="col-7">
+                <img *ngIf="recipt!=''" height="80px" [src]="recipt" alt="receipt">
+            </div>
+            <div class="col-12 pt-3">
+                <span (click)="conformPayment()" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">
+                    <img *ngIf="loading" class="dup" src="assets/images/ar1.gif"/>
+                    <span *ngIf="!loading">Submit Receipt</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!showrecpt" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2">
+        <h5 (click)="showrecpt=true" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center p-1">
+            Upload your receipt
+        </h5>
+    </div>
+</div>
+<div class="px-3">
+    <div class="content my-2 text-center">
+        <h4>Note</h4>
+        Please upload your <strong>payment receipt</strong> for instant update because if you do not upload your receipt our automatic system can take up to <strong>48 hours</strong> but if you upload your receipt then our system automatically verifies your payment within <strong>5 minutes</strong>.
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="card card-style">
+    <div class="content text-center pb-5 pt-4">
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <li class="color-theme">Your payment will be credited to your wallet shortly.</li>
+            <li class="color-theme">We have successfully informed the seller.</li>
+            <li class="color-theme">Kindly wait for a few minutes.</li>
+        </ul>
+        <div>
+            <img src="assets/images/timer.gif" alt="">
+        </div>
+
+        
+        <div *ngIf="!disp" class="mt-4">
+            <div class="text-center mt-3">
+                <span (click)="disp=true" class="btn btn-danger  orbtn">
+                    <span>Create Dispute</span>
+                </span>
+            </div>
+        </div>
+
+        <div *ngIf="disp">
+            <div class="content mt-0">
+                <h5 class="pb-3 pt-4">Personal Information</h5>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="text" class="form-control rounded-xs" id="c1a" [(ngModel)]="user.userid" placeholder="2343242343284" readonly />
+                    <label for="c1a" class="form-label-always-active color-highlight">User id</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="email" readonly class="form-control rounded-xs" id="c1" [(ngModel)]="user.email" placeholder="name@domain.com" />
+                    <label for="c1" class="color-highlight form-label-always-active">Email Address</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <textarea class="form-control rounded-xs" [(ngModel)]="query" rows="5"></textarea>
+                    <label for="c2" class="color-highlight form-label-always-active">Explain Your Problem</label>
+                    <span>(required)</span>
+                </div>
+                <a (click)="createDiput()" class="btn btn-full gradient-highlight shadow-bg shadow-bg-s mt-4">Submit Dispute</a>
+            </div>
+        </div>
+    </div>
+</div>

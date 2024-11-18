@@ -1,0 +1,68 @@
+
+<div class="card card-style">
+    <div class="content">
+        <h5>Payment confirmation</h5>
+        <div *ngIf="payment!=null" class="collapse show">
+            <div>
+                <div class="divider my-2 opacity-50"></div>
+                <div class="d-flex pt-1">
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">{{payment.userid.split(",")[1]}}</h5>
+                        <p class="mb-0 font-11 opacity-70">{{payment.datetime | date: 'dd-MM-yyyy hh:mm a'}}</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-red-dark">${{(payment.usdamnt*1).toFixed(2)}}</h4>
+                        <p class="mb-0 font-11">₹{{(payment.transferant*1).toFixed(2)}}</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="align-self-center ps-1">
+                        <p class="m-0 font-11 opacity-70"><strong class="text-success font-14">{{payment.status}}</strong></p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <span (click)="conformPayment()" class="btn btn-info orbtn">
+                            <img *ngIf="loading" class="dup" src="assets/images/ar1.gif"/>
+                            <span *ngIf="!loading">Confirm</span>
+                        </span>
+                    </div>
+                </div>
+                <p class="m-0 font-11 opacity-70">Please check the receipt and confirm this payment.</p>
+                <div class="text-center pt-3">
+                    <img class="orimg" src="{{imgUrl}}assets/img/recept/{{payment.recipt}}" alt="Payment receipt">
+                </div>
+                
+                <div *ngIf="!disp">
+                    <div class="text-center mt-3">
+                        <span (click)="disp=true" class="btn btn-danger  orbtn">
+                            <span>Create Dispute</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div *ngIf="disp">
+                    <div class="content mt-0">
+                        <h5 class="pb-3 pt-4">Personal Information</h5>
+                        <div class="form-custom form-label form-border mb-3 bg-transparent">
+                            <input type="text" class="form-control rounded-xs" id="c1a" [(ngModel)]="user.userid" placeholder="2343242343284" readonly />
+                            <label for="c1a" class="form-label-always-active color-highlight">User id</label>
+                            <span>(required)</span>
+                        </div>
+                        <div class="form-custom form-label form-border mb-3 bg-transparent">
+                            <input type="email" readonly class="form-control rounded-xs" id="c1" [(ngModel)]="user.email" placeholder="name@domain.com" />
+                            <label for="c1" class="color-highlight form-label-always-active">Email Address</label>
+                            <span>(required)</span>
+                        </div>
+                        <div class="form-custom form-label form-border mb-3 bg-transparent">
+                            <textarea class="form-control rounded-xs" [(ngModel)]="query" rows="5"></textarea>
+                            <label for="c2" class="color-highlight form-label-always-active">Explain Your Problem</label>
+                            <span>(required)</span>
+                        </div>
+                        <a (click)="createDiput()" class="btn btn-full gradient-highlight shadow-bg shadow-bg-s mt-4">Submit Dispute</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

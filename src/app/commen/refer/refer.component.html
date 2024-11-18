@@ -1,0 +1,20 @@
+<div class="card card-style">
+    <div class="content py-1">
+        <div class="text-center">
+            <img src="assets/images/gift.gif" alt="">
+            <h3>Refer your friends and family and receive up to $100 in a day.</h3>
+            <p>Upon your friend's registration, you will receive a <b>$1 reward.</b>  Moreover, if your friend chooses to invest in MAKDFS above 100$, you will be eligible to receive a bonus equal to <b>{{this.user.comitionAmount}}% of the invested amount.</b></p>
+            <p><strong>Note:-</strong> $1 can be redeem only after a trade of $100.</p>
+            <p></p>
+            <!-- <p *ngIf="user.referralAmount==10" class="text-success"><strong>You can increase your referral amount <b>₹10 to ₹30</b> only after first investment. <br><a (click)="ptptrad()" routerLink="/buy/crypto">Invest Now</a> || <a target="_blank" href="https://www.youtube.com/watch?v=QgYNXz1n3ys">Learn More</a></strong></p> -->
+            <div class="form-custom form-label form-icon text-start">
+                <i class="bi bi-link font-14"></i>
+                <input type="text" class="form-control rounded-xs" readonly placeholder="Your Name" value="https://makdfs.page.link/{{user.userid}}">
+            </div>
+            <div *ngIf="!loading">
+                <button *ngIf="active" (click)="referNow()" class="btn btn-danger mt-3 mb-5">Refer Now</button>
+                <p *ngIf="!active" class="text-danger"><strong>The referral option is currently inactive for you. Please make an investment, and then you'll be able to use this feature.</strong></p>
+            </div>
+        </div>
+    </div>
+</div>

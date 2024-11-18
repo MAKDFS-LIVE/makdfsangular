@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView Interaction</title>
+    <script>
+        function buttonClicked() {
+            // Call the Swift function through the JavaScript interface
+            window.webkit.messageHandlers.buttonClicked.postMessage("Button was clicked!");
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to the WebView!</h1>
+    <button onclick="buttonClicked()">Click me</button>
+</body>
+</html>

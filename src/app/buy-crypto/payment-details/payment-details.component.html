@@ -1,0 +1,66 @@
+<div class="card card-style">
+    <div class="content">
+        <h4>{{recever.name}}</h4>
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <!-- <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>MAK-DFS is holding the seller's crypto.</li> -->
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>MAK-DFS 24/7 customer support.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Only use your account to transfer funds.</li>
+            <li class="color-theme"><i class="bi bi-x-circle-fill color-red-dark"></i>Third party payment are prohibited.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <h4>Payable Amount</h4>
+        <div class="row mt-n3">
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="0" selected="">INR</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="text" value="₹{{inrAmnt.toFixed(2)}}" readonly class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h5 class="exchange-arrow"><i class="bi bi-arrow-left-right"></i></h5>
+            </div>
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="inrAmnt" selected="">USD</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number" [value]="(inrAmnt/recever.mak).toFixed(2)" readonly class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content text-center pt-3">
+        <img style="width: 200px;" src="assets/images/cqr.png" alt="">
+        <p class="mb-2">mab0450018a0189026&#64;yesbank</p>
+        <p>Scan to pay.<br>Please ensure you pay the exact amount specified in INR.</p>
+
+        <div class="row mt-5">
+            <div class="col-6">
+                <span routerLink="/wallet/open" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-s">Cancel</span>
+            </div>
+            <div class="col-6">
+                <span (click)="conformPayment()" routerLink="/wallet/pay-conform" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">Confirm</span>
+            </div>
+        </div>
+    </div>
+</div>

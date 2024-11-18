@@ -1,0 +1,161 @@
+
+
+<div *ngIf="!freedPay" class="card card-style">
+    <div class="content">
+        <h4>Get loan based on your <strong>{{curency.curency}}</strong> coins</h4>
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Amount can only be used for intraday trading.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Collateral coin will be blocked till the return of the amount.</li>
+        </ul>
+        <label for="check"> <input checked disabled type="checkbox"> Accept Terms & Conditions</label>
+    </div>
+</div>
+
+
+<div class="card card-style">
+    <div class="content">
+        <div class="collapse show">
+            <div *ngFor="let item of curency; index as i;">
+                <div class="d-flex">
+                    <div>
+                        <span class="icon">
+                            <img src="{{item.icon}}" width="25" class="rounded-s" alt="img">
+                        </span>
+                    </div>
+                    <div class="ps-1">
+                        <h1 class="font-14 mb-n1">{{item.curency | uppercase}}</h1>
+                        <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.name}}</h5>
+                    </div>
+                    <div class="ms-auto pt-1">
+                        <span class="rounded-l font-500 font-12 d-block text-end color-green-dark" >${{(item.value*1).toFixed(4)}}</span>
+                        <h1 class="mb-0 mt-n2 font-16 text-end">{{(item.wallet*1).toFixed(4)}}</h1>
+                    </div>
+                </div>
+                <div *ngIf="curency.length>0" class="divider my-2 opacity-50"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <h4 *ngIf="!freedPay">Enter required amount</h4>
+        <h4 *ngIf="freedPay">Required amount</h4>
+        <div class="row mt-n3">
+            <div class="col-6 pt-3">
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number" checked [readonly]="freedPay" [(ngModel)]="usdtAmnt" class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!freedPay" class="col-6">
+                <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+                    <div class="content my-2">
+                        <span (click)="recevedPayment()" class="d-flex">
+                            <div class="align-self-center  w-100">
+                                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                    Apply
+                                </h5>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div *ngIf="!freedPay" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3">
+    <div class="content my-2">
+        <span (click)="recevedPayment()" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-card-checklist color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Apply
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Tap Now
+                </h5>
+            </div>
+        </span>
+    </div>
+</div> -->
+
+<div *ngIf="freedPay" class="card card-style">
+    <div class="content my-4">
+        <h5>Loan Details</h5>
+        <table class="w-100">
+            <tr>
+                <th style="width: 150px;">Required Amount</th>
+                <td>${{usdtAmnt.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <th>{{curency.curency}} Amount</th>
+                <td>{{(usdtAmnt / curency.price).toFixed(4)}}</td>
+            </tr>
+            <tr>
+                <th>Interest Rate</th>
+                <td>{{intrest.intrest}}%</td>
+            </tr>
+            <tr>
+                <th>Processing fee</th>
+                <td>{{intrest.procesing}}%</td>
+            </tr>
+            <!-- <tr>
+                <th>Sequrity</th>
+                <td>{{intrest.sequrity}}%</td>
+            </tr>
+            <tr>
+                <th>Preening fee</th>
+                <td>{{intrest.preening}}%</td>
+            </tr> -->
+        </table>
+        <h5 class="mt-1">Select tenure</h5>
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="orweek"><strong>Week</strong></div>                    
+            </div>
+            <div class="col-7">
+                <div class="quantity size-2">
+                    <input type="text" [value]="weeks" readonly="">
+                    <button type="button" (click)="plush(1)" class="qty-plus"><i class="bi bi-plus"></i></button>
+                    <button type="button" (click)="plush(-1)" class="qty-minus"><i class="bi bi-dash"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="w-100 mt-1">
+            <tr>
+                <th style="width: 150px;">Total Interest</th>
+                <td>{{weeks* (intrest.intrest/48)}}%</td>
+            </tr>
+            <tr>
+                <th>Creditable USD</th>
+                <td>${{creditable.toFixed(4)}} = {{(creditable / makVaue).toFixed(2)}} MAK</td>
+            </tr>
+            <tr class="text-success">
+                <th>Payable USD</th>
+                <td>${{(paybleusdt).toFixed(4)}} = {{(paybleusdt / makVaue).toFixed(2)}} MAK</td>
+            </tr>
+        </table>
+        <hr>
+        <div class="row mt-2">
+            <div class="col-6">
+                <span routerLink="/loan/main" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-s">Cancel</span>
+            </div>
+            <div class="col-6">
+                <span (click)="conformLoan()" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">
+                    <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                    <span *ngIf="!loading">Confirm</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

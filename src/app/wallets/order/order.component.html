@@ -1,0 +1,36 @@
+<div class="card card-style mt-3">
+    <div class="content">
+
+        <div class="tabs tabs-pill" id="tab-group-2">
+            <div class="tab-controls rounded-m p-1 overflow-visible">
+                <a (click)="openOrder()" class="font-13 rounded-m shadow-bg shadow-bg-s" [attr.aria-expanded]="ex2">Open Orders</a>
+                <a (click)="pastOrder()" class="font-13 rounded-m shadow-bg shadow-bg-s" [attr.aria-expanded]="ex3">Past Orders</a>
+            </div>
+        </div>
+
+        
+        <div *ngFor="let item of treds; index as i;">
+            <div (click)="openCurency(i)" routerLink="/buy/crypto" class="d-flex">
+                <div class="ps-1">
+                    <h1 class="font-14 mb-n1">{{item.symble | uppercase}} 
+                        <small>(<span *ngIf="item.price!='Imported' && item.price!='Exported'"></span>{{orgnigation.cuntryCurency(item.price)}})</small> 
+                        <small *ngIf="item.status=='Pending' || item.status=='Canceled'" [class.text-warning]="item.status=='Pending'" [class.text-info]="item.status=='Canceled'"> {{item.status}}</small>
+                    </h1>
+                    <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.datetime | date:'dd-MM-yyyy hh:mm a'}}</h5>
+                </div>
+                <div class="ms-auto">
+                    <span *ngIf="item.price!='Imported' && item.price!='Exported'" class="rounded-l font-500 font-12 d-block text-end" [class.color-green-dark]="item.type=='Buy' && item.status!='Canceled'" [class.color-red-dark]="item.type=='Sell'">{{orgnigation.cuntryCurency(item.usdt*1)}}</span>
+                    <h1 class="mb-0 font-16 text-end" [class.mt-n2]="item.price!='Imported' && item.price!='Exported'" [class.mt-3]="item.price=='Imported' || item.price=='Exported'">{{(item.amount * 1).toFixed(5)}}</h1>
+                </div>
+            </div>
+            <div class="divider my-2 opacity-50"></div>
+        </div>
+        <div *ngIf="loadtred" class="py-5">
+            <div class="text-center ptb-50">
+                <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+            </div>
+        </div>
+        <div *ngIf="notred.length>0" class="text-center pt-5">You don't have any order history.</div>
+
+    </div>
+</div>

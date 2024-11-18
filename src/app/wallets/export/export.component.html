@@ -1,0 +1,141 @@
+<div class="px-3">
+    <div class="splide__slide">
+        <div class="card card-style mb-3 mx-0">
+            <div class="content pb-0">
+                <div class="d-flex">
+                    <div class="ps-1">
+                        <h1 class="font-24 mb-n1">USDT</h1>
+                        <h5 class="font-14 font-400 opacity-70 mb-n1">Available</h5>
+                    </div>
+                    <div class="ms-auto text-end pt-3">
+                        <h1 *ngIf="!waletLoading" class="mb-0 mt-n2">${{usdtWallet}}</h1>
+                        <img *ngIf="waletLoading" src="assets/images/ar1.gif" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="exchangeShow">
+        <h3 class="mb-2">Select Exchange</h3>
+        <div class="row makcrd">
+            <div class="col-6" *ngFor="let item of exchange; index as i;">
+                <div (click)="loadWallet(i)" class="card card-style">
+                    <div class="text-center p-1">
+                        <div class="form-custom form-label form-border">
+                            <h5 class="mt-2"><img [src]="item.url" width="25" class="rounded-s" alt=""> {{item.name}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="walletShow">
+        <h3 class="mb-2">Select Account</h3>
+        <div (click)="addWallet()" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+            <div class="content my-2">
+                <span class="d-flex">
+                    <div class="align-self-center">
+                        <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+                    </div>
+                    <div class="align-self-center">
+                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                            Add New Wallet ( {{exchangeSelected.name}} )
+                        </h5>
+                    </div>
+                    <div class="align-self-center ms-auto">
+                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                            <i class="bi bi-plus-circle color-white pe-3"></i>
+                        </h5>
+                    </div>
+                </span>
+            </div>
+        </div>        
+        <div class="collapse show">
+            <div *ngFor="let item of account; index as i;">
+                <div (click)="loadPayment(i)" class="d-flex py-1">
+                    <div class="align-self-center ps-1">
+                        <h6 class="mt-2 font-15">{{item.name}}</h6>
+                        <p class="mb-0 font-15">{{item.walletid}} </p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <i class="bi bi-trash text-danger"></i>
+                    </div>
+                </div>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            <div *ngIf="nodata.length>0" class="py-5 text-center">No any wallet added at this time,<br>You can add new wallet</div>
+        </div> 
+    </div>
+
+    <div *ngIf="addWalletShow" [formGroup]="wallet">
+        <h3 class="mb-2">Wallet Details for ( {{exchangeSelected.name}} )</h3>
+        <div class="mt-3"></div>
+        <label class="form-label-always-active color-highlight">Exchange</label>
+        <div class="form-custom form-label form-icon">
+            <input type="text" readonly class="form-control rounded-xs mpl-0" formControlName="exchange" placeholder="Bank Name">
+            <span>(required)</span>
+        </div>
+        <div class="mt-3"></div>
+        <label class="form-label-always-active color-highlight">Recever Name</label>
+        <div class="form-custom form-label form-icon">
+            <input type="text" class="form-control rounded-xs mpl-0" formControlName="name" placeholder="Name">
+            <span>(required)</span>
+        </div>
+        <div class="mt-3"></div>
+        <label class="form-label-always-active color-highlight">Wallet Id</label>
+        <div class="form-custom form-label form-icon">
+            <input type="text" class="form-control rounded-xs mpl-0" formControlName="walletid" placeholder="Id">
+            <span>(required)</span>
+        </div>
+        <div class="pb-2 mt-5"></div>
+        <button (click)="submit()" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-xs mt-3 mb-3 w-100">
+            <label *ngIf="load"><img class="dup" src="assets/images/ar1.gif"/></label>
+            <span *ngIf="!load">Proceed</span>
+        </button>
+    </div>
+
+    <div *ngIf="wltAmnt">
+        <div class="row">
+            <div class="col-12">
+                <div class="buysell">
+                    <div class="content text-center pt-2">
+                        <div class="form-custom form-label form-border mt-5">
+                            <div class="row mt-n3">
+                                <div class="col-12 color-green-dark mb-2"><strong class="text-danger">Send To</strong><br>{{paymentDetails.walletid}}</div>
+                                <div class="col-12">
+                                    <div class="form-custom form-label form-border">
+                                        <div class="form-custom form-label">
+                                            <input type="number" [(ngModel)]="payAmount" class="form-control exchange-value border-0 rounded-xs text-center bg-black" placeholder="$0.00">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 pt-1 pb-1">
+                                            <div (click)="sendMoney()" class="content my-2 text-center">
+                                                <img *ngIf="load" src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                                                <h5 *ngIf="!load" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                                    Send USDT
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="suceess" class="text-center text-success pt-3">
+        Your payment is successfuly send in recever account.<br>It will be reflected in 5 minuts. <br>
+        
+    </div>

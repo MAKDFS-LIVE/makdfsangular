@@ -1,0 +1,94 @@
+<div class="card card-style">
+    <div class="content">
+        <h4>Get loan based on your crypto coins</h4>
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <!-- <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>You can get up to 60% of loan on your total coins.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>0% interest for 60 days.</li> -->
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Amount can only be used for intraday trading.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Collateral coin will be blocked till the return of the amount.</li>
+        </ul>
+        <label for="check"> <input checked disabled type="checkbox"> Accept Terms & Conditions</label>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <div class="collapse show">
+            <div *ngFor="let item of transaction; index as i;">
+                <div *ngIf="item.curency!='MAK'">
+                    <div class="d-flex">
+                        <div class="align-self-center">
+                            <input (change)="checked(i)" type="checkbox" [ngModel]="item.selected">
+                        </div>
+                        <div>
+                            <span class="icon">
+                                <img src="{{item.icon}}" width="25" class="rounded-s" alt="img">
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.curency | uppercase}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.name}}</h5>
+                        </div>
+                        <div class="ms-auto pt-1">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark" >${{(item.value*1).toFixed(4)}}</span>
+                            <h1 class="mb-0 mt-n2 font-16 text-end">{{(item.wallet*1).toFixed(4)}}</h1>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+            </div>
+            <div *ngIf="nodata.length>0">
+                <div class="content py-1 text-center">
+                    <h2 class="text-danger">Your account balance is empty; there are no funds available..</h2>
+                    <h4>Please add money in your wallet</h4>                    
+                    <div class="addmoneyinwaallet">
+                        <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+                            <div class="content my-2">
+                                <span routerLink="/wallet/other-platform" class="d-flex">
+                                    <div class="align-self-center w-100 py-1">
+                                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                            Import Crypto
+                                        </h5>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nomessage" *ngIf="messgage.length>0">{{messgage}}</div>
+<div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2">
+        <span (click)="procide()" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Proceed to apply for loan
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    ${{openWallet.toFixed(4)}}
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<br><br><br><br>
+

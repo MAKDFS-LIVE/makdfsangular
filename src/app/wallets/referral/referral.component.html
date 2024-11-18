@@ -1,0 +1,131 @@
+<div class="px-3">
+    <div class="splide__slide">
+        <div class="card card-style m-0 bg-9 shadow-card shadow-card-m" style="height:200px">
+            <div class="card-center">
+                <div class="bg-theme px-3 py-2 rounded-end d-inline-block">
+                    <h1 class="font-13 my-n1">
+                        <span class="color-theme">Referral Wallet Balance</span>
+                    </h1>
+                    <div class="collapse show">
+                        <h2 class="color-theme font-26">${{(refferWallet).toFixed(2)}}</h2>
+                    </div>
+                </div>
+            </div>
+            <strong class="card-top no-click font-12 p-3 color-white font-monospace">Referral Account</strong>
+            <strong class="card-bottom no-click p-3 text-start color-white font-monospace">Minimum limit for withdrawal is ${{minimumWithdraw}}</strong>
+            <div class="card-overlay bg-black opacity-50"></div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!widra" class="row">
+    <div class="col-7">
+        <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mt-3">
+            <div class="content my-2">
+                <span (click)="withdrawal()" class="d-flex">
+                    <div class="align-self-center">
+                        <h1 class="mb-0 font-14"><i class="bi bi-card-checklist color-white pe-3"></i></h1>
+                    </div>
+                    <div class="align-self-center">
+                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                            Withdrawal
+                        </h5>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mt-3">
+            <div class="content my-2">
+                <span routerLink="/refer" class="d-flex">
+                    <div class="align-self-center">
+                        <h1 class="mb-0 font-14"><i class="bi bi-share color-white pe-3"></i></h1>
+                    </div>
+                    <div class="align-self-center">
+                        <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                            Share Now
+                        </h5>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="widra" class="card card-style mt-3">
+    <div class="content pt-2">
+        <div class="row" [formGroup]="updateamount">
+            <div class="col-7">
+                <div class="form-custom form-label form-icon mb-0">
+                    <input formControlName="amount" type="number" class="form-control rounded-xs" placeholder="Your Amount">
+                </div>
+            </div>
+            <div class="col-5">
+                <div (click)="submit()" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mt-2">
+                    <div class="content my-2">
+                        <span>
+                            <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                <img *ngIf="load" class="loading" src="assets/images/ar1.gif" alt="preloader">
+                                <span *ngIf="!load">Submit</span>                                
+                            </h5>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card card-style mt-3">
+    <div class="content ">
+        <p class="text-danger text-center" style="font-size: 11px;font-weight: bold;line-height: 16px;"><strong>Note:-</strong> Please make sure that, Your name should match to your bank account. If we found inaccurate details, your withdrawal will be put on hold.</p>
+    </div>
+</div> -->
+
+<div *ngIf="referralAmount==10" class="card card-style gradient-blue rounded-s shadow-bg shadow-bg-xs mb-3 mt-0">
+    <div class="content my-2">
+        <span routerLink="/upgrade" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Get ₹30 on Each Refferal
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Upgrade Now
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<div class="card card-style mt-1">
+    <div class="content">
+        <div class="collapse show">
+            <div *ngFor="let item of transaction; index as i;">
+                <div class="d-flex">
+                    <div class="ps-1">
+                        <h1 class="font-16 mb-n1 text-success" [class.text-danger]="(item.amount*1)<0">{{item.sponcername}}</h1>
+                        <h5 *ngIf="item.status=='Active'" class="font-13 font-400 opacity-70 mb-n1 text-success">Approved</h5>
+                        <h5 *ngIf="item.status!='Active'" class="font-13 font-400 opacity-70 mb-n1" [class.text-danger]="item.status=='Approved'" [class.text-warning]="item.status=='Pending'">{{item.status}}</h5>
+                    </div>
+                    <div class="ms-auto">
+                        <h1 class="mb-0 mt-n2 font-16 text-end" [class.text-danger]="(item.amount*1)<0">${{(item.amount*1).toFixed(2)}}</h1>
+                        <span class="rounded-l font-500 font-12 d-block text-end"  [innerHtml]="item.note"></span>
+                    </div>
+                </div>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            
+            <div *ngIf="loging" class="text-center">
+                <img src="assets/images/ar1.gif" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+

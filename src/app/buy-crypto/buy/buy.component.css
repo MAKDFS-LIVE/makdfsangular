@@ -1,0 +1,14 @@
+.priceContainer{width: 100%;border-bottom: solid thin rgb(78, 76, 76);padding-top: 5px;padding-bottom: 5px;}
+.priceContainer .left{float: left;width: 70%;text-align: left;}
+.priceContainer .left label{font-weight: bold;color: black;}
+.priceContainer .left input{margin: 0 0 0 0;padding: 0 !important;margin-top: -15px;width: 100%;min-height: 2em;font-size: 18px !important;font-weight: bold;max-height: 4em;height: 3em;border-radius: 10px;background-color: var(--background-col);color: var(--text-col);border: none;}
+.priceContainer .left input:focus{outline: none;}
+.priceContainer .right{float: left;width: 30%;}
+.priceContainer .variation{width: 100px;border: solid thin rgb(78, 76, 76);}
+.priceContainer .variation .minus,.priceContainer .variation .plush{width: 50%;line-height: 30px;float: left;text-align: center;cursor: pointer;}
+.clear{clear: both;}
+.arbr{border-right: solid thin rgb(78, 76, 76);}
+.buysell{border-top: solid 2px rgb(70, 70, 70);}
+.arcont{padding-left: 15px;padding-right: 15px;}
+.ortp{padding-top: 12px;}
+.bi-trash{margin-left: 10px;cursor: pointer;}

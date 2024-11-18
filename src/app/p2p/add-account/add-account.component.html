@@ -1,0 +1,113 @@
+<!-- <div class="page-title d-flex">
+    <div class="align-self-center me-auto">
+        <h1 class="color-theme mb-0 font-18">Back to Profile</h1>
+    </div>
+</div> -->
+
+<div *ngIf="payType==''" class="card card-style">
+    <div class="content">
+        <h5>Select payment details</h5>
+        <div class="collapse show" id="tab-5" data-bs-parent="#tab-group-2">
+            <div *ngFor="let item of accountType">
+                <div (click)="loadMoad(item.paymentType)" class="d-flex py-1">
+                    <div class="align-self-center ps-1">
+                        <h4 class="pt-1 mb-n1 color-red-dark">{{item.paymentType}}</h4>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <i class="bi bi-plus-circle color-white pe-3"></i>
+                    </div>
+                </div>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="payType!=''" class="card card-style">
+    <div class="content my-1">
+        <h5 class="pb-3 pt-4">Account Details</h5>
+        <div class="collapse show">
+            <div class="mt-3"></div>
+            <label class="form-label-always-active color-highlight">Your Name</label>
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-person font-14"></i>
+                <input type="text" class="form-control rounded-xs" readonly value="{{user.name}}" placeholder="Your Name">
+                <span>(required)</span>
+            </div>
+
+            <div *ngIf="payType=='Paytm'" [formGroup]="patym">
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Paytm Number</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="number" class="form-control rounded-xs" formControlName="paytmNo" [(ngModel)]="details.paytmNo" placeholder="Paytm Number">
+                    <span>(required)</span>
+                </div>
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Payment QR code(Optional)</label>
+                <input id="qr1" (change)="onselectfile($event)" type="file" class="d-none">
+                <div *ngIf="qr1==''">
+                    <label for="qr1"><img width="100px" src="/assets/images/upload.jpg" alt=""></label>
+                    <img *ngIf="details.qrcode.length>0" width="100px" [src]="imgUrl+'assets/img/qr/'+details.qrcode" alt="">
+                </div>
+                <div *ngIf="qr1!=''"><img height="80px" [src]="qr1" alt="receipt"></div>
+            </div>
+            
+            <div *ngIf="payType=='UPI'" [formGroup]="UPI">
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">UPI ID</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="text" class="form-control rounded-xs" formControlName="upiid" [(ngModel)]="details.upiid" placeholder="UPI ID">
+                    <span>(required)</span>
+                </div>
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Payment QR code(Optional)</label>
+                <input id="qr2" (change)="onselectfile2($event)" type="file" class="d-none">
+                <div *ngIf="qr2==''">
+                    <label for="qr2"><img width="100px" src="/assets/images/upload.jpg" alt=""></label>
+                    <img *ngIf="details.qrcode.length>0" width="100px" [src]="imgUrl+'assets/img/qr/'+details.qrcode" alt="">
+                </div>
+                <div *ngIf="qr2!=''"><img height="80px" [src]="qr2" alt="receipt"></div>
+            </div>
+
+            <div *ngIf="payType=='IMPS'" [formGroup]="IMPS">
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Account Number</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="text" class="form-control rounded-xs" formControlName="accountNo" [(ngModel)]="details.accountNo" placeholder="Account Number">
+                    <span>(required)</span>
+                </div>
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">IFSC</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="text" class="form-control rounded-xs" formControlName="ifsc" [(ngModel)]="details.ifsc" placeholder="IFSC">
+                    <span>(required)</span>
+                </div>
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Bank Name</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="text" class="form-control rounded-xs" formControlName="bankName" [(ngModel)]="details.bankName" placeholder="Bank Name">
+                    <span>(required)</span>
+                </div>
+                <div class="mt-3"></div>
+                <label class="form-label-always-active color-highlight">Branch Name</label>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-bank font-14"></i>
+                    <input type="text" class="form-control rounded-xs" formControlName="baranchName" [(ngModel)]="details.baranchName" placeholder="Branch Name">
+                    <span>(required)</span>
+                </div>
+            </div>
+
+            <div class="pb-2 mt-5"></div>
+            <label class="form-check-label">Tips: During trade, details of the added payment method will be shown to the buyer to make due payment, Whereas sellers will see the buyer's real name.</label>
+            <button (click)="submit()" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-xs mt-3 mb-3 w-100">
+                <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                <span *ngIf="!loading">Confirm</span>
+            </button>
+        </div>
+    </div>
+</div>

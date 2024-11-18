@@ -1,0 +1,182 @@
+
+<div class="card card-style mt-3">
+    <div class="content">
+        <div class="tabs tabs-pill">
+            <div class="collapse show">
+                <div class="text-center">
+                    <img src="{{indeatails.icon}}" width="25px" alt="">&nbsp; <strong>MAK</strong>
+                </div>
+                <div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Total Amount</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                {{(indeatails.makAmnt*1).toFixed(3)}} ≈ ${{(indeatails.makAmnt* mak.current_price).toFixed(3)}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Estimated Annual Yield</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                24%
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Monthaly Profit</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                {{(indeatails.makAmnt* (0.02)).toFixed(3)}} ≈ ${{((indeatails.makAmnt* (0.02)) * mak.current_price).toFixed(3)}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Yearly Profit</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                {{(indeatails.makAmnt* (0.24)).toFixed(3)}} ≈ ${{((indeatails.makAmnt* (0.24))* mak.current_price).toFixed(3)}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Subscription Date</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                {{indeatails.datetime | date:'dd-MM-yyyy'}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Locked Period</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                365 Day(s)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Total Receivables</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                {{((indeatails.makAmnt* (0.24)) + (indeatails.makAmnt*1)).toFixed(3)}} ≈ ${{(((indeatails.makAmnt* (0.24))+(indeatails.makAmnt*1))*0.00108).toFixed(2)}}
+                            </span>
+                        </div>
+                    </div>
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Interest End Date</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                12-07-2023
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Accrue Days</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                1 Day(s)
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Cumulative Interest</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                0.00
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Est. Next Distribution Amount</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                454
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Interest Date</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                12-07-2023
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Redemption Date</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                12-07-2023
+                            </span>
+                        </div>
+                    </div> -->
+                    <div class="divider my-2 opacity-50"></div>
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">Redem To</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end color-green-dark">
+                                ---
+                            </span>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+
+                    <div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+                        <div class="content my-2 text-center">
+                            <span (click)="redeed()">
+                                <div class="align-self-center">
+                                    <h5 class="color-white font-600 mb-1 mt-1 font-14 line-height-s">
+                                        <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                                        <span *ngIf="!loading">Redeem Early</span>
+                                    </h5>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

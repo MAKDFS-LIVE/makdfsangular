@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mak-dfs": {
+      "hosting": {
+        "maknew": [
+          "mak-dfs"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mak-dfs"
+  }
+}

@@ -1,0 +1,51 @@
+<div class="px-3">
+    <div class="splide__slide">
+        <div class="card card-style m-0 bg-5 shadow-card shadow-card-m" style="height:200px">
+            <div class="card-center">
+                <div class="bg-theme px-3 py-2 rounded-end d-inline-block">
+                    <h1 class="font-13 my-n1">
+                        <span class="color-theme">Loan Amount</span>
+                    </h1>
+                    <div class="collapse show">
+                        <h2 class="color-theme font-26">{{orgnigation.cuntryCurency(loanAmount)}}</h2>
+                    </div>
+                </div>
+            </div>
+            <strong class="card-top no-click font-12 p-3 color-white font-monospace"><span style="font-size: 18px;">0%</span> interest rate</strong>
+            <strong class="card-bottom no-click p-3 text-start color-white font-monospace">Wallet ID: {{user.userid}}</strong>
+            <div class="card-overlay bg-black opacity-50"></div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style mt-3">
+    <div class="content">
+        <div class="collapse show">
+            <div *ngFor="let item of transaction; index as i;">
+                <div (click)="details(i)" class="d-flex pt-1">
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">{{item.curency}} || {{item.name}}</h5>
+                        <p class="mb-0 font-11 opacity-70">{{item.datetime | date: 'dd-MM-yyyy hh:mm a'}}</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-red-dark">${{(item.usdtAmnt*1).toFixed(2)}}</h4>
+                        <p class="mb-0 font-11">{{(item.localCurency*1).toFixed(4)}}</p>
+                    </div>
+                </div>
+                <p class="m-0 font-11 opacity-70"><strong class="font-14" [class.text-warning]="item.status=='Initiated'" [class.text-success]="item.status=='Approved'">{{item.status}}</strong> | {{item.remark}}</p>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            
+            <div *ngIf="nodata.length>0" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/no-data.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

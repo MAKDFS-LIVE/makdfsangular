@@ -1,0 +1,43 @@
+<div class="card card-style mt-3">
+    <div class="content">
+        <div class="form-custom form-label cntsr">
+            <input type="text" (keyup)="onKeyUp($event)" autocomplete="off" placeholder="Search Coin" class="form-control rounded-xs ctrsrc" />
+            <span><em class="bi bi-search"></em></span>
+        </div>
+        <div class="crccnt">
+            <div (click)="cnrType='USDT'" [class.vactive]="cnrType=='USDT'" class="cntirn">USDT</div>
+            <div (click)="cnrType='INR'" [class.vactive]="cnrType=='INR'" class="cntirn">INR</div>
+        </div>
+
+
+        <div class="tabs tabs-pill" id="tab-group-2">
+            <div class="tab-controls rounded-m p-1 overflow-visible">
+                <a (click)="allMarket()" class="font-13 rounded-m shadow-bg shadow-bg-s" [attr.aria-expanded]="ex1">All</a>
+                <a (click)="marketUp()" class="font-13 rounded-m shadow-bg shadow-bg-s" [attr.aria-expanded]="ex2">Market Up</a>
+                <a (click)="marketDown()" class="font-13 rounded-m shadow-bg shadow-bg-s" [attr.aria-expanded]="ex3">Market Down</a>
+            </div>
+        </div>
+
+        <div *ngFor="let item of display; index as i;">
+            <div class="d-flex" (click)="crypto(i)" routerLink="/buy/crypto">
+                <div>
+                    <span class="icon">
+                        <img src="{{item.image}}" width="25" class="rounded-s" alt="img">
+                    </span>
+                </div>
+                <div class="ps-1">
+                    <h1 class="font-14 mb-n1">{{item.symbol | uppercase}}</h1>
+                    <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.name}}</h5>
+                </div>
+                <div class="ms-auto">
+                    <span class="rounded-l font-500 font-12 d-block text-end" [class.color-green-dark]="item.price_change_percentage_24h>0" [class.color-blue-dark]="item.price_change_percentage_24h==0" [class.color-red-dark]="item.price_change_percentage_24h<0">
+                        <i class="bi  pe-2" [class.bi-caret-up-fill]="item.price_change_percentage_24h>0" [class.bi-caret-down-fill]="item.price_change_percentage_24h<0" ></i><span *ngIf="item.price_change_percentage_24h>0">Up</span><span *ngIf="item.price_change_percentage_24h<0">Down</span> by {{item.price_change_percentage_24h.toFixed(2)}}%
+                    </span>
+                    <h1 class="mb-0 mt-n2 font-16 text-end">{{price(item.current_price)}}</h1>
+                </div>
+            </div>
+            <div class="divider my-2 opacity-50"></div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="card card-style">
+    <div class="content py-1 text-center">
+        <img src="assets/images/preload.gif" alt="">
+        <h2 class="text-danger">Your wallet amount is very low</h2>
+        <h4>Please add money in your wallet</h4>
+        <img class="w-100" src="assets/images/lowwallet.png" alt="">
+        
+        <div class="addmoneyinwaallet">
+            <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+                <div class="content my-2">
+                    <span (click)="crypto(0)" routerLink="/buy/crypto" class="d-flex">
+                        <div class="align-self-center w-100 py-1">
+                            <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                Add Money
+                            </h5>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style" style="background-image: url(assets/images/bg2.png);">
+    <div class="content py-1">
+        <div class="d-flex text-center pt-1 pb-1">
+            <div class="m-auto">
+                <div class="orreturn">
+                    <div class="cld retrntext">Get assured return</div>
+                    <div class="cld">24%</div>
+                </div>
+            </div>
+            <div class="m-auto" style="width:120px">
+                <span (click)="crypto(0)" routerLink="/buy/crypto" class="btn btn-info">Buy MAK</span>
+            </div>
+        </div>
+    </div>
+</div>

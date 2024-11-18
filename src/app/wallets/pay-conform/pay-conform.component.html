@@ -1,0 +1,39 @@
+<div class="card card-style">
+    <div class="content">
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Don't submit the inaccurate transaction details.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Don't upload invalid receipts.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>If incorrect information is provided during the submission process, your account may be subject to deactivation.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <h5>Upload your payment receipt</h5>
+        <div class="row mt-2 text-center">
+            <div class="col-5">
+                <label for="recipt"><img height="80px" src="assets/images/upload.jpg" alt="upload"></label>
+                <input (change)="onselectfile($event)" accept=".jpg,.jpeg,.png" capture="file" class="d-none" id="recipt" type="file">
+            </div>
+            <div class="col-7">
+                <img *ngIf="recipt!=''" height="80px" [src]="recipt" alt="receipt">
+            </div>
+            <div class="col-12 pt-5">
+                <span (click)="conformPayment()" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">
+                    <img *ngIf="loading" class="dup" src="assets/images/ar1.gif"/>
+                    <span *ngIf="!loading">Submit Receipt</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <p class="text-danger text-center ft-16"><strong>NOTE:-</strong> Do not submit fake receipts. If we detect any fake receipts, your account will be <strong>permanently suspended.</strong></p>
+    </div>
+</div>

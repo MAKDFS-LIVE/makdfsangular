@@ -1,0 +1,87 @@
+<div class="col-12 mb-n2">
+    <div class="default-link card card-style" style="height:60px">
+        <div class="card-center text-center">
+            <div class="collapse show px-2">
+                <div class="d-flex">
+                    <div>
+                        <span class="icon">
+                            <img src="{{curency.icon}}" width="25" class="rounded-s" alt="img">
+                        </span>
+                    </div>
+                    <div class="ps-1">
+                        <h1 class="font-14 mb-n1">{{curency.curency}}</h1>
+                        <h5 class="font-10 font-400 opacity-70 mb-n1">{{curency.name}}</h5>
+                    </div>
+                    <div class="ms-auto pt-1 mr-20">
+                        <span class="rounded-l font-500 font-12 d-block text-end color-green-dark" >${{(curency.value*1).toFixed(4)}}</span>
+                        <h1 class="mb-0 mt-n2 font-16 text-end">{{(curency.wallet*1).toFixed(4)}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <h4>Get <strong>24%</strong> assured return</h4>
+        <p class="mb-1">
+            <strong class="text-success">Invest with us</strong> & multiply your money
+        </p>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <h5>Enter Amount</h5>
+        <div class="row mt-n3">
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="0" selected="">USD</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number"  [(ngModel)]="usdtAmnt" class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h5 class="exchange-arrow"><i class="bi bi-arrow-left-right"></i></h5>
+            </div>
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="0" selected="">{{curency.curency}}</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number" [value]="(usdtAmnt / curency.price).toFixed(2)" readonly class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3">
+    <div class="content my-2">
+        <span (click)="investPayment()" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-card-checklist color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                    <span *ngIf="!loading">Invest payment</span>
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Tap Now
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>

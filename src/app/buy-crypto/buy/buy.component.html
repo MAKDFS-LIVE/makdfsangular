@@ -1,0 +1,298 @@
+<div class="col-12 mb-n2">
+    <div class="default-link card card-style" style="height:50px">
+        <div class="card-center text-center">
+            <div class="row">
+                <!-- <div [class.col-7]="(curencyWallet*curency.current_price)>=10" [class.col-12]="(curencyWallet*curency.current_price)<10" [class.ortp]="(curencyWallet*curency.current_price)>=10"> -->
+                <div class="class.col-12">
+                    <div class="form-custom form-label form-border">
+                        <h5 class="mt-2"><em (click)="saveFaveret()" class="bi bi-eye mr-20 pointer" [class.text-danger]="truEye"></em><img src="{{curency.image}}" width="25" class="rounded-s" alt="{{curency.name}}"> {{curency.symbol | uppercase}} ${{curency.current_price.toFixed(5)}}</h5>
+                    </div>
+                </div>
+               <!--  <div class="col-5" *ngIf="(curencyWallet*curency.current_price)>=10">
+                    <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+                        <div class="content my-2">
+                            <span routerLink="/loan/home" class="d-flex">
+                                <div class="align-self-center  w-100">
+                                    <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                                        Get Loan
+                                    </h5>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="maktabs">
+    <div (click)="tab='info'" class="tab" [class.active]="tab=='info'">Info</div>
+    <div (click)="tab='order'" class="tab" [class.active]="tab=='order'">Order</div>
+    <div (click)="tab='history'" class="tab" [class.active]="tab=='history'">History</div>
+</div>
+<div *ngIf="tab=='info'" class="tab-cont">
+    <div>
+        <!-- <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'260px'}"></canvasjs-chart> -->
+
+        <!-- <igx-financial-chart height="100%" width="260px"
+            [dataSource]="data"
+            chartType="line"
+            thickness=2
+            yAxisMode="PercentChange"
+            yAxisTitle="Percent Changed">
+        </igx-financial-chart> -->
+
+        <div *ngIf="curency.symbol=='MAK'">
+            <igx-financial-chart  width="100%" height="300px"
+            [dataSource]="stocksData"
+            isToolbarVisible="true"
+            chartType="Candle"
+            yAxisMode="Numeric"
+            yAxisTitleLeftMargin="0"
+            yAxisTitleRightMargin="0"
+            yAxisLabelLeftMargin="0"
+            zoomSliderType="None">
+            </igx-financial-chart>
+        </div>
+
+        <div *ngIf="curency.symbol!='MAK'">
+            <iframe style="width: 100%;height: 300px;" [src]="chartUrl" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="card card-style mt-2">
+        <div class="content">
+            <div>
+                <div class="d-flex">
+                    <div>
+                        <span class="icon">
+                            <img src="{{curency.image}}" width="25" class="rounded-s" alt="img">
+                        </span>
+                    </div>
+                    <div class="ps-1">
+                        <h1 class="font-14 mb-n1">{{curency.symbol | uppercase}}</h1>
+                        <h5 class="font-10 font-400 opacity-70 mb-n1">{{curency.name}}</h5>
+                    </div>
+                    <div class="ms-auto" style="padding-top: 20px;">
+                        <h1 class="mb-0 mt-n2 font-16 text-end">{{(orgnigation.cuntryCurency(curency.current_price))}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mkstatus">
+        <h3>STATUS</h3>
+        <table>
+            <tr>
+                <td>Market Cap</td>
+                <td class="text-right">${{curency.market_cap}}</td>
+            </tr>
+            <tr>
+                <td>Circulating Supply Cap</td>
+                <td class="text-right">${{curency.circulating_supply}}</td>
+            </tr>
+            <tr>
+                <td>Total Supply</td>
+                <td class="text-right">${{curency.total_supply}}</td>
+            </tr>
+            <tr>
+                <td>24H Volume</td>
+                <td class="text-right">${{curency.total_volume}}</td>
+            </tr>
+            <tr>
+                <td>24H Change</td>
+                <td class="text-right">{{curency.price_change_percentage_24h}}%</td>
+            </tr>
+        </table>
+    </div>
+    <div class="p-2">
+        <h4>About {{curency.symbol | uppercase}}</h4>
+        <p>{{curency.about}}</p>
+    </div>
+</div>
+<div *ngIf="tab=='order'" class="tab-cont">
+    <div class="arcont">
+        <div *ngFor="let item of pendingTred; index as i;">
+            <div class="d-flex">
+                <div class="ps-1">
+                    <h1 class="font-14 mb-n1">{{item.symble | uppercase}} <small>(${{item.price}})</small> <small *ngIf="item.status=='Pending'" class="text-warning"> {{item.status}}</small></h1>
+                    <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.datetime | date:'dd-MM-yyyy hh:mm a'}}</h5>
+                </div>
+                <div class="ms-auto">
+                    <span class="rounded-l font-500 font-12 d-block text-end" [class.color-green-dark]="item.type=='Buy'" [class.color-red-dark]="item.type=='Sell'">${{(item.usdt*1).toFixed(4)}}</span>
+                    <h1 class="mb-0 mt-n2 font-16 text-end">{{(item.amount * 1).toFixed(5)}}</h1>
+                </div>
+            </div>
+            <div class="divider my-2 opacity-50"></div>
+        </div>
+        <div *ngIf="loadtred" class="py-5">
+            <div class="text-center ptb-50">
+                <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+            </div>
+        </div>
+        <div *ngIf="pendingTred.length==0" class="text-center pt-5">You don't have any pending order.</div>
+    </div>
+</div>
+<div *ngIf="tab=='history'" class="tab-cont">
+    <div class="arcont">
+        <div *ngFor="let item of treds; index as i;">
+            <div class="d-flex">
+                <div class="ps-1">
+                    <h1 class="font-14 mb-n1">{{item.symble | uppercase}} 
+                        <small>(<span *ngIf="item.price!='Imported' && item.price!='Exported'">$</span>{{item.price}})</small> 
+                        <small *ngIf="item.status=='Pending' || item.status=='Canceled'" [class.text-warning]="item.status=='Pending'" [class.text-info]="item.status=='Canceled'"> {{item.status}}</small>
+                        <em (click)="cancelOrder(i)" *ngIf="item.status=='Pending'" class="bi bi-trash"></em>
+                    </h1>
+                    <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.datetime | date:'dd-MM-yyyy hh:mm a'}}</h5>
+                </div>
+                <div class="ms-auto">
+                    <span *ngIf="item.price!='Imported' && item.price!='Exported'" class="rounded-l font-500 font-12 d-block text-end" [class.color-green-dark]="item.type=='Buy' && item.status!='Canceled'" [class.color-red-dark]="item.type=='Sell'">${{(item.usdt*1).toFixed(4)}}</span>
+                    <h1 class="mb-0 font-16 text-end" [class.mt-n2]="item.price!='Imported' && item.price!='Exported'" [class.mt-3]="item.price=='Imported' || item.price=='Exported'">{{(item.amount * 1).toFixed(5)}}</h1>
+                </div>
+            </div>
+            <div class="divider my-2 opacity-50"></div>
+        </div>
+        <div *ngIf="loadtred" class="py-5">
+            <div class="text-center ptb-50">
+                <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+            </div>
+        </div>
+        <div *ngIf="notred.length>0" class="text-center pt-5">You don't have any order history.</div>
+    </div>
+</div>
+
+<div *ngIf="tab=='info'" class="row" style="position: fixed;bottom: 80px;right: 0;left: 0;max-width: 450px;margin: 0 auto;z-index: 100;">
+    <div *ngIf="bysell!=''" class="col-12 p-0">
+        <div class="buysell">
+            <div (click)="bysell=''" class="cls">x</div>
+            <div class="content text-center pt-2">
+                <div class="color-green-dark mt-1 mb-2"><strong>{{curencyWallet.toFixed(8)}} {{curency.symbol | uppercase}} Available</strong></div>
+                <div class="priceContainer">
+                    <div class="left">
+                        <label>AT PRICE | <small>USDT</small> <span class="percents" [class.text-success]="(((atPrice/curency.current_price)*100)-100)>0">{{(((atPrice/curency.current_price)*100)-100).toFixed(2)}}%</span></label>
+                        <input type="text" (keyup)="priceUp($event)" [(ngModel)]="atPrice">
+                    </div>
+                    <div class="right pt-3">
+                        <div class="variation">
+                            <div class="minus arbr" (click)="priceChange(-1)"><em class="bi bi-dash"></em></div>
+                            <div class="plush" (click)="priceChange(1)"><em class="bi bi-plus"></em></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            
+                <div class="priceContainer">
+                    <div class="left">
+                        <label>AMOUNT | <span class="text-success">{{curency.symbol | uppercase}}</span></label>
+                        <input type="text" (keyup)="amountUp($event)" [(ngModel)]="amount" placeholder="0.00">
+                        <span *ngIf="bysell=='sell'" (click)="maxAmount()" style="position: absolute;right: 150px;margin-top: -5px;font-weight: bold;color: green;cursor: pointer;">MAX</span> 
+                    </div>
+                    <div class="right pt-3">
+                        <div class="variation">
+                            <div class="minus arbr" (click)="amountChange(-1)"><em class="bi bi-dash"></em></div>
+                            <div class="plush" (click)="amountChange(1)"><em class="bi bi-plus"></em></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="priceContainer">
+                    <div class="left">
+                        <label>TOTAL | <small>USDT</small></label>
+                        <input type="text" (keyup)="totalAmountUp($event)" [(ngModel)]="totalAmount" placeholder="0.00">
+                        <!-- <span *ngIf="bysell=='buy'" (click)="maxUsdtAmount()" style="position: absolute;right: 150px;margin-top: -5px;font-weight: bold;color: green;cursor: pointer;">MAX</span> --> 
+                    </div>
+                    <div class="right pt-3">
+                        <div class="variation">
+                            <div class="minus arbr" (click)="totalAmountChange(-1)"><em class="bi bi-dash"></em></div>
+                            <div class="plush" (click)="totalAmountChange(1)"><em class="bi bi-plus"></em></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div *ngIf="bysell=='buy'">
+                        <hr class="mb-2 mt-0 text-black">
+                        <div>
+                            <div class="adauto"><strong><em class="bi bi-wallet"></em> {{usdtWallet}} USDT </strong> | </div>
+                            <div (click)="priceSet(25)" class="adauto sell">25%</div>
+                            <div (click)="priceSet(50)" class="adauto sell">50%</div>
+                            <div (click)="priceSet(75)" class="adauto sell">75%</div>
+                            <div (click)="priceSet(100)" class="adauto sell">100%</div>
+                            <div class="clear sell"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-custom form-label form-border mt-5">
+                    <div class="row mt-n3">
+                        <div class="col-6 orq">
+                            Amount
+                            <div class="form-custom form-label form-border">
+                                <div class="form-custom form-label">
+                                    <input type="number" [(ngModel)]="usdtAmnt" class="form-control exchange-value border-0 rounded-xs text-center bg-black" placeholder="$00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 orq">
+                            Quantity
+                            <div class="form-custom form-label form-border">
+                                <div class="form-custom form-label">
+                                    <input type="number" value="{{(usdtAmnt/curency.current_price).toFixed(4)}}" class="form-control exchange-value border-0 rounded-xs text-center bg-black" placeholder="$00">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-custom form-label form-border">
+                                <div class="form-custom form-label">
+                                    <input type="number" value="Market Price" class="form-control exchange-value border-0 rounded-xs text-center bg-black" placeholder="$00">
+                                </div>
+                                
+                            </div>
+                            <label for=""><input type="checkbox"> Custome price</label>
+                        </div>
+                        <div class="col-12 color-red-dark">Estimated Quantity ≈  {{usdtAmnt/curency.current_price}}</div>
+                    </div>
+                </div> -->
+            </div>
+            <div *ngIf="bysell=='buy'" class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-4 pt-1 pb-1">
+                <div (click)="buycrypto()" class="content my-2 text-center">
+                    <img *ngIf="load" src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                    <h5 *ngIf="!load" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                        BUY {{curency.symbol | uppercase}}
+                    </h5>
+                </div>
+            </div>
+            <div *ngIf="bysell=='sell'" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-4 pt-1 pb-1">
+                <div (click)="sellcrypto()" class="content my-2 text-center">
+                    <img *ngIf="load2" src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                    <h5 *ngIf="!load2" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                        SELL {{curency.symbol | uppercase}}
+                    </h5>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div *ngIf="bysell==''" class="col-6" [class.col-12]="curency.symbol=='usdt'">
+        <div class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 pt-1 pb-1">
+            <div (click)="bysell='buy'" class="content my-2 text-center">
+                <img *ngIf="load" src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                <h5 *ngIf="!load" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                    BUY {{curency.symbol | uppercase}}
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="bysell==''  && curency.symbol!='usdt'" class="col-6">
+        <div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 pt-1 pb-1">
+            <div (click)="bysell='sell'" class="content my-2 text-center">
+                <img *ngIf="load2" src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                <h5 *ngIf="!load2" class="color-white font-600 mb-0 mt-0 font-14 line-height-s text-center">
+                    SELL {{curency.symbol | uppercase}}
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>

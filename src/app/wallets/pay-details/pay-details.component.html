@@ -1,0 +1,167 @@
+<div class="card card-style">
+    <div class="content">
+        <h4>{{recever.name}}</h4>
+        <p class="mb-3">
+            <strong class="text-success">Secure payment</strong> - a unique payment processing.
+        </p>
+        <ul class="icon-list">
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>MAK-DFS is holding the seller's crypto.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>MAK-DFS 24/7 customer support.</li>
+            <li class="color-theme"><i class="bi bi-check-circle-fill color-green-dark"></i>Only use your account to transfer funds.</li>
+            <li class="color-theme"><i class="bi bi-x-circle-fill color-red-dark"></i>Third party payment are prohibited.</li>
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="!cnfpay" class="card card-style">
+    <div>
+        <div class="splide__slide">
+            <div class="card card-style mb-0 mx-0">
+                <div class="content pb-0">
+                    <div class="d-flex">
+                        <div class="ps-1">
+                            <h3 class="font-16 mb-0">Available balance</h3>
+                        </div>
+                        <div class="ms-auto text-end pr-2">
+                            <h3 class="mb-0 font-16">$0.00 <!-- {{((recever.quantity*1) - (recever.selled*1)).toFixed(2)}} --></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <h4>Enter amount</h4>
+        <div class="row mt-n3">
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="0" selected="">INR</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number" [(ngModel)]="inrAmnt" class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <h5 class="exchange-arrow"><i class="bi bi-arrow-left-right"></i></h5>
+            </div>
+            <div class="col-5">
+                <div class="form-custom form-label form-border">
+                    <select class="form-select color-blue-dark exchange-select rounded-xs border-0" disabled>
+                        <option value="0" selected="">USD</option>
+                    </select>
+                </div>
+                <div class="form-custom form-label form-border">
+                    <div class="form-custom form-label">
+                        <input type="number" [value]="(inrAmnt/recever.mak).toFixed(2)" readonly class="form-control exchange-value border-0 rounded-xs" placeholder="00.00">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!cnfpay" class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3">
+    <div class="content my-2">
+        <span (click)="sequrePayment()" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-card-checklist color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Secure payment
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Tap to Pay
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+
+<div *ngIf="cnfpay" class="card card-style">
+    <div class="content">
+        <h4>Payment Details</h4>
+        <table *ngIf="recever.paymentType=='Paytm'" class="table color-theme mt-2">
+            <tr>
+                <td><strong>Payable Amount</strong></td>
+                <td>₹ {{inrAmnt.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>{{recever.accountid.split(",")[1]}}</td>
+            </tr>
+            <tr>
+                <td><strong>Paytm number</strong></td>
+                <td>{{recever.accountid.split(",")[6]}}</td>
+            </tr>
+            <tr>
+                <td class="text-center">
+
+                </td>
+            </tr>
+        </table>
+        <table *ngIf="recever.paymentType=='UPI'" class="table color-theme mt-2">
+            <tr>
+                <td><strong>Payable Amount</strong></td>
+                <td>₹ {{inrAmnt.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>{{recever.accountid.split(",")[1]}}</td>
+            </tr>
+            <tr>
+                <td><strong>UPI ID</strong></td>
+                <td>{{recever.accountid.split(",")[7]}}</td>
+            </tr>
+            <tr>
+                <td class="text-center" colspan="2">
+                    <img width="200px" [src]="imgUrl+'assets/img/qr/'+recever.accountid.split(',')[8]" alt="">
+                </td>
+            </tr>
+        </table>
+        <table *ngIf="recever.paymentType=='IMPS'" class="table color-theme mt-2">
+            <tr>
+                <td><strong>Payable Amount</strong></td>
+                <td>₹ {{inrAmnt.toFixed(2)}}</td>
+            </tr>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>{{recever.accountid.split(",")[1]}}</td>
+            </tr>
+            <tr>
+                <td><strong>Ac. No.</strong></td>
+                <td>{{recever.accountid.split(",")[2]}}</td>
+            </tr>
+            <tr>
+                <td><strong>IFSC</strong></td>
+                <td>{{recever.accountid.split(",")[3]}}</td>
+            </tr>
+            <tr>
+                <td><strong>Bank Name</strong></td>
+                <td>{{recever.accountid.split(",")[4]}}</td>
+            </tr>
+            <tr>
+                <td><strong>Branch Name</strong></td>
+                <td>{{recever.accountid.split(",")[5]}}</td>
+            </tr>
+        </table>
+
+        <div class="row mt-5">
+            <div class="col-6">
+                <span routerLink="/wallet/open" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-s">Cancel</span>
+            </div>
+            <div class="col-6">
+                <span (click)="conformPayment()" routerLink="/wallet/pay-conform" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">Confirm</span>
+            </div>
+        </div>
+    </div>
+</div>
+

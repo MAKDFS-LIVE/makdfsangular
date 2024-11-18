@@ -1,0 +1,650 @@
+
+<div class="onlymobile">
+<div id="page"></div>
+  <div *ngIf="!hrefx.includes('profile') && !hrefx.includes('refure') && !hrefx.includes('signup')" id="footer-bar" class="footer-bar-1 footer-bar-detached">
+    <a routerLink="/wallet/my-funds"><i class="bi bi-wallet2"></i><span>Wallet</span></a>
+    <a routerLink="/search-coin"><i class="bi bi-graph-up"></i><span>Invest</span></a>
+    <a routerLink="/" class="circle-nav-2"><i class="bi bi-house-fill"></i><span>Home</span></a>
+    <a routerLink="/wallet/open"><i class="bi bi-receipt"></i><span>Payments</span></a>
+    <a routerLink="/wallet/order"><i class="bi bi-graph-up"></i><span>Order</span></a>
+    <!-- <a data-bs-toggle="offcanvas" data-bs-target="#menu-sidebar"><i class="bi bi-three-dots"></i><span>More</span></a> -->
+  </div>
+  
+  <div class="page-content">
+    <div class="pt-2 fixed-top or theme-light" *ngIf="!hrefx.includes('profile') && !hrefx.includes('refure') && !hrefx.includes('signup')">
+        <div class="page-title d-flex">
+            <a class="icon rounded-m ml-0 mr-20">
+                <img src="assets/images/logo.png" width="45" class="rounded-m" alt="img">
+            </a>
+            <div class="align-self-center me-auto">
+                <img *ngIf="user==null" src="assets/images/ar1.gif" alt="preloader">
+                <h1 *ngIf="user!=null">{{user.name.split(" ")[0]}}</h1>
+            </div>
+            <div class="align-self-center ms-auto">
+                <div class="gtcurency">
+                    <select [(ngModel)]="countryCurency" (change)="curency()">
+                        <option value="USD">USD</option>
+                        <option value="INR">INR</option>
+                    </select>
+                </div>
+                <!-- <span class="icon gradient-blue color-white shadow-bg shadow-bg-xs rounded-m">
+                    <i class="bi bi-qr-code font-20"></i>
+                </span> -->
+                <span [attr.data-bs-toggle]="user!=null?'dropdown':''" class="icon rounded-m bg-black">
+                    <img *ngIf="user==null" src="assets/images/ar1.gif" alt="preloader">
+                    <img *ngIf="user!=null" [src]="loadImg()" width="45" height="45" class="rounded-m" alt="img">
+                </span>
+
+                <div class="dropdown-menu">
+                    <div class="card card-style shadow-m mt-1 me-1">
+                        <div class="list-group list-custom list-group-s list-group-flush rounded-xs px-3 py-1">
+                            
+                            <a *ngIf="user.status=='Approved'" routerLink="/profile" class="list-group-item">
+                                <i class="has-bg gradient-green shadow-bg shadow-bg-xs color-white rounded-xs bi bi-person"></i>
+                                <strong class="font-13">Profile</strong>
+                            </a>
+                            <a *ngIf="user.status=='Approved'" routerLink="/qr-wallet" class="list-group-item">
+                                <i class="has-bg gradient-blue shadow-bg shadow-bg-xs color-white rounded-xs bi bi-qr-code"></i>
+                                <strong class="font-13">Get Payment</strong>
+                            </a>
+                            <!-- <a *ngIf="user.status=='Approved'" routerLink="/p2p/trading" class="list-group-item">
+                                <i class="has-bg gradient-blue shadow-bg shadow-bg-xs color-white rounded-xs bi bi-graph-up"></i>
+                                <strong class="font-13">P2P Trading</strong>
+                            </a>
+                            <a *ngIf="user.status=='Approved'" routerLink="/p2p/account" class="list-group-item">
+                                <i class="has-bg gradient-yellow shadow-bg shadow-bg-xs color-white rounded-xs bi bi-person-circle"></i>
+                                <strong class="font-13">P2P Account's</strong>
+                            </a> -->
+                            <a *ngIf="user.status=='Approved'" routerLink="/help" class="list-group-item">
+                                <i class="has-bg gradient-green shadow-bg shadow-bg-xs color-white rounded-xs bi bi-question-circle"></i>
+                                <strong class="font-13">Help</strong>
+                            </a>
+                            <!-- <a *ngIf="user.status=='Approved'" routerLink="/member" class="list-group-item">
+                                <i class="has-bg gradient-green shadow-bg shadow-bg-xs color-white rounded-xs bi bi-people"></i>
+                                <strong class="font-13">Join as Member</strong>
+                            </a> -->
+                            <a (click)="logout()" class="list-group-item">
+                                <i class="has-bg gradient-red shadow-bg shadow-bg-xs color-white rounded-xs bi bi-power"></i>
+                                <strong class="font-13">Log Out</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 80px;" *ngIf="!hrefx.includes('profile') && !hrefx.includes('refure') && !hrefx.includes('signup')"></div>
+
+    <router-outlet></router-outlet>
+    
+    <div style="height: 80px;" *ngIf="!hrefx.includes('profile') && !hrefx.includes('refure') && !hrefx.includes('signup')"></div>
+  </div>
+
+    <!-- <div id="menu-sidebar" data-menu-active="nav-welcome" class="offcanvas offcanvas-start offcanvas-detached rounded-m">
+        <div class="menu-size" style="width:230px;">
+            <div class="pt-3">
+                <div class="page-title sidebar-title d-flex">
+                    <div class="align-self-center me-auto">
+                        <p class="color-highlight">Welcome Back</p>
+                        <img *ngIf="user==null" src="assets/images/ar1.gif" alt="preloader">
+                        <h1 *ngIf="user!=null">{{user.name.split(" ")[0]}}</h1>
+                    </div>
+                    <div class="align-self-center ms-auto">
+                        <span [attr.data-bs-toggle]="user!=null?'dropdown':''" class="icon gradient-blue shadow-bg shadow-bg-s rounded-m">
+                            <img *ngIf="user==null" src="assets/images/ar1.gif" alt="preloader">
+                            <img *ngIf="user!=null" [src]="'assets/images/profile/31s.jpg'" width="45" class="rounded-m" alt="img">
+                        </span>
+        
+                        <div class="dropdown-menu">
+                            <div class="card card-style shadow-m mt-1 me-1">
+                                <div class="list-group list-custom list-group-s list-group-flush rounded-xs px-3 py-1">
+                                    <a href="page-wallet.html" class="list-group-item">
+                                        <i
+                                            class="has-bg gradient-green shadow-bg shadow-bg-xs color-white rounded-xs bi bi-credit-card"></i>
+                                        <strong class="font-13">Wallet</strong>
+                                    </a>
+                                    <a href="page-activity.html" class="list-group-item">
+                                        <i
+                                            class="has-bg gradient-blue shadow-bg shadow-bg-xs color-white rounded-xs bi bi-graph-up"></i>
+                                        <strong class="font-13">Activity</strong>
+                                    </a>
+                                    <a href="page-profile.html" class="list-group-item">
+                                        <i
+                                            class="has-bg gradient-yellow shadow-bg shadow-bg-xs color-white rounded-xs bi bi-person-circle"></i>
+                                        <strong class="font-13">Account</strong>
+                                    </a>
+                                    <span class="list-group-item">
+                                        <i class="has-bg gradient-red shadow-bg shadow-bg-xs color-white rounded-xs bi bi-power"></i>
+                                        <strong class="font-13">Log Out</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider divider-margins mb-3 opacity-50"></div>
+        
+                <div class="list-group list-custom list-menu-large">
+                    <a href="index-waves.html" id="nav-welcome" class="list-group-item list-group-item-active">
+                        <i class="bi bg-red-dark shadow-bg shadow-bg-xs bi-heart-fill"></i>
+                        <div>Welcome</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a href="pages.html" id="nav-pages" class="list-group-item">
+                        <i class="bi bg-green-dark shadow-bg shadow-bg-xs bi-star-fill"></i>
+                        <div>Page Packs</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a href="#" id="nav-homes" data-submenu="sub1" class="list-group-item">
+                        <i class="bi bg-blue-dark shadow-bg shadow-bg-xs bi-house-fill"></i>
+                        <div>Home Styles</div>
+                        <i class="bi bi-plus font-18"></i>
+                    </a>
+                    <div class="list-submenu" id="sub1">
+                        <a href="index-waves.html" id="nav-waves" class="list-group-item">
+                            <div class="ps-4">Waves</div>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                        <a href="index.html" id="nav-classic" class="list-group-item">
+                            <div class="ps-4">Classic</div>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                    <a href="components.html" id="nav-comps" class="list-group-item">
+                        <i class="bi bg-brown-dark shadow-bg shadow-bg-xs bi-gear-wide-connected"></i>
+                        <div>Components</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a data-bs-toggle="offcanvas" data-bs-target="#menu-highlights" href="#" class="list-group-item">
+                        <i class="bi bg-magenta-dark shadow-bg shadow-bg-xs bi-droplet"></i>
+                        <div>Color Theme</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a href="#" class="list-group-item" data-toggle-theme="" data-trigger-switch="switch-1">
+                        <i class="bi bg-yellow-dark shadow-bg shadow-bg-xs bi-lightbulb-fill"></i>
+                        <div>Dark Mode</div>
+                        <div class="form-switch ios-switch switch-green switch-s me-2">
+                            <input type="checkbox" data-toggle-theme="" class="ios-input" id="switch-1">
+                            <label class="custom-control-label" for="switch-1"></label>
+                        </div>
+                    </a>
+                </div>
+                <div class="divider divider-margins mb-3 opacity-50"></div>
+        
+                <div class="content pt-1">
+                    <div class="d-flex text-center">
+                        <div data-bs-toggle="offcanvas" data-bs-target="#menu-transfer" class="me-auto">
+                            <span class="icon icon-s rounded-s gradient-red shadow-bg shadow-bg-xs">
+                                <i class="font-16 color-white bi bi-arrow-up"></i>
+                            </span>
+                            <h6 class="font-11 font-400 opacity-70 mb-n1 pt-2">Transfer</h6>
+                        </div>
+                        <div data-bs-toggle="offcanvas" data-bs-target="#menu-request" class="m-auto">
+                            <span class="icon icon-s rounded-s gradient-green shadow-bg shadow-bg-xs">
+                                <i class="font-16 color-white bi bi-arrow-down"></i>
+                            </span>
+                            <h6 class="font-11 font-400 opacity-70 mb-n1 pt-2">Request</h6>
+                        </div>
+                        <div data-bs-toggle="offcanvas" data-bs-target="#menu-exchange" class="ms-auto">
+                            <span class="icon icon-s rounded-s gradient-blue shadow-bg shadow-bg-xs">
+                                <i class="font-16 color-white bi bi-arrow-left-right"></i>
+                            </span>
+                            <h6 class="font-11 font-400 opacity-70 mb-n1 pt-2">Exchange</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider divider-margins opacity-50"></div>
+        
+                <h6 class="opacity-40 px-3 mt-n2 mb-0">Useful Links</h6>
+                <div class="list-group list-custom list-menu-small">
+                    <a data-bs-toggle="offcanvas" data-bs-target="#menu-sidebar" routerLink="user/support" class="list-group-item default-link">
+                        <i class="bi bi-arrow-up-circle-fill opacity-20 font-16"></i>
+                        <div>Support</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a data-bs-toggle="offcanvas" data-bs-target="#menu-sidebar" routerLink="user/profile" class="list-group-item">
+                        <i class="bi bi-person-circle opacity-20 font-16"></i>
+                        <div>Account</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    <a (click)="logout()" class="list-group-item">
+                        <i class="bi bi-bar-chart-fill opacity-20 font-16"></i>
+                        <div>Log Out</div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+                <div class="divider divider-margins opacity-50"></div>
+        
+                <p class="px-3 font-9 opacity-30 color-theme mt-n3">Copyright <span class="copyright-year">2023</span>. Made
+                    with <i class="bi bi-heart-fill color-red-dark px-1"></i> by Enabled</p>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div id="curency-list" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:540px;">
+            <div class="d-flex mx-3 mt-2">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Currency List</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="ps-4" shadow-0="" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26 line-height-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-2 mb-0"></div>
+            <div class="content mt-0">
+                <div *ngFor="let item of curency; index as i;">
+                    <div class="d-flex">
+                        <div>
+                            <span class="icon">
+                                <img src="{{item.image}}" width="25" class="rounded-s" alt="{{item.name}}">
+                            </span>
+                        </div>
+                        <div class="ps-1">
+                            <h1 class="font-14 mb-n1">{{item.symbol}}</h1>
+                            <h5 class="font-10 font-400 opacity-70 mb-n1">{{item.name}}</h5>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="rounded-l font-500 font-12 d-block text-end" [class.color-green-dark]="item.price_change_percentage_24h>0" [class.color-blue-dark]="item.price_change_percentage_24h==0" [class.color-red-dark]="item.price_change_percentage_24h<0">
+                                <i class="bi  pe-2" [class.bi-caret-up-fill]="item.price_change_percentage_24h>0" [class.bi-caret-down-fill]="item.price_change_percentage_24h<0" ></i><span *ngIf="item.price_change_percentage_24h>0">Up</span><span *ngIf="item.price_change_percentage_24h<0">Down</span> by {{item.price_change_percentage_24h.toFixed(2)}}%
+                            </span>
+                            <h1 class="mb-0 mt-n2 font-16 text-end">${{(item.current_price*1).toFixed(2)}}</h1>
+                        </div>
+                        <div class="align-self-center ps-1">
+                            <div class="form-switch ios-switch switch-green switch-s">
+                                <input (change)="curencyStatus(i)" type="checkbox" class="ios-input" id="switchs-{{i}}" [checked]="item.status=='Active'">
+                                <label class="custom-control-label" for="switchs-{{i}}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider my-2 opacity-50"></div>
+                </div>
+                <div style="height: 50px;"></div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- <div id="menu-notifications" class="offcanvas offcanvas-top offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:365px;">
+            <div class="d-flex mx-3 mt-3 py-1">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Notifications</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="py-3 ps-4 shadow-0 me-n2" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="content pb-2">
+                <a href="page-activity.html" class="d-flex py-1">
+                    <div class="align-self-center">
+                        <span class="icon rounded-s me-2 gradient-orange shadow-bg shadow-bg-xs"><i
+                                class="bi bi-google color-white"></i></span>
+                    </div>
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">Google Ads</h5>
+                        <p class="mb-0 font-11 opacity-70">14th March 03:14 AM</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-red-dark">$150.55</h4>
+                        <p class="mb-0 font-11">Bill Payment</p>
+                    </div>
+                </a>
+                <div class="divider my-2 opacity-50"></div>
+                <a href="page-activity.html" class="d-flex py-1">
+                    <div class="align-self-center">
+                        <span class="icon rounded-s me-2 gradient-green shadow-bg shadow-bg-xs"><i
+                                class="bi bi-caret-up-fill color-white"></i></span>
+                    </div>
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">Bitcoin</h5>
+                        <p class="mb-0 font-11 opacity-70">14th March, 10:25 AM</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <h4 class="pt-1 mb-n1 color-blue-dark">+0.315%</h4>
+                        <p class="mb-0 font-11">Stock Update</p>
+                    </div>
+                </a>
+                <div class="divider my-2 opacity-50"></div>
+                <a href="page-activity.html" class="d-flex py-1">
+                    <div class="align-self-center">
+                        <span class="icon rounded-s me-2 gradient-yellow shadow-bg shadow-bg-xs"><i
+                                class="bi bi-pie-chart-fill color-white"></i></span>
+                    </div>
+                    <div class="align-self-center ps-1">
+                        <h5 class="pt-1 mb-n1">Dividends</h5>
+                        <p class="mb-0 font-11 opacity-70">13th March 11:31 AM</p>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <span class="btn btn-xxs bg-green-dark shadow-bg shadow-bg-xs">Details</span>
+                    </div>
+                </a>
+            </div>
+            <a href="page-activity.html" class="mx-3 btn btn-full gradient-highlight shadow-bg shadow-bg-s">View All
+                Notifications</a>
+        </div>
+    </div>
+    <div id="menu-transfer" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:440px;">
+            <div class="d-flex mx-3 mt-3 py-1">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Transfer Funds</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="ps-4" shadow-0="" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26 line-height-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-3"></div>
+            <div class="content mt-0">
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-wallet2 font-14"></i>
+                    <select class="form-select rounded-xs" id="c6" aria-label="Floating label select example">
+                        <option selected="">Main Account</option>
+                        <option value="1">Savings Account</option>
+                        <option value="2">Company Account</option>
+                    </select>
+                    <label for="c6" class="form-label-always-active color-highlight font-11">Choose Account</label>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-code-square font-14"></i>
+                    <input type="number" class="form-control rounded-xs" id="c3" placeholder="BNK_1245">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">ID Number</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-code-square font-14"></i>
+                    <input type="number" class="form-control rounded-xs" id="c4" placeholder="150.00">
+                    <label for="c4" class="form-label-always-active color-highlight font-11">Amount</label>
+                    <span class="font-10">( Currency: USD )</span>
+                </div>
+                <div class="pb-2"></div>
+                <div class="form-check form-check-custom">
+                    <input class="form-check-input" type="checkbox" name="type" value="" id="c2">
+                    <label class="form-check-label" for="c2">I accept the Transfer <a href="#">Terms of Service</a></label>
+                    <i class="is-checked color-green-dark font-14 bi bi-check-circle-fill"></i>
+                    <i class="is-unchecked color-green-dark font-14 bi bi-circle"></i>
+                </div>
+            </div>
+            <a href="#" data-bs-dismiss="offcanvas" class="mx-3 mb-3 btn btn-full gradient-green shadow-bg shadow-bg-s">Transfer
+                Funds</a>
+        </div>
+    </div>
+    <div id="menu-request" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:370px;">
+            <div class="d-flex mx-3 mt-3 py-1">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Request Funds</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="ps-4 shadow-0 me-n2" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26 line-height-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-3"></div>
+            <div class="content mt-0">
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-person-circle font-14"></i>
+                    <input type="email" class="form-control rounded-xs" id="c32" placeholder="john@domain.com">
+                    <label for="c32" class="form-label-always-active color-highlight font-11">Request From</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-code-square font-14"></i>
+                    <input type="number" class="form-control rounded-xs" id="c43" placeholder="150.00">
+                    <label for="c43" class="form-label-always-active color-highlight font-11">Amount</label>
+                    <span class="font-10">( Currency: USD )</span>
+                </div>
+                <div class="pb-2"></div>
+                <div class="form-check form-check-custom">
+                    <input class="form-check-input" type="checkbox" name="type" value="" id="c2a">
+                    <label class="form-check-label" for="c2a">I accept the Request <a href="#">Terms of Service</a></label>
+                    <i class="is-checked color-green-dark font-14 bi bi-check-circle-fill"></i>
+                    <i class="is-unchecked color-green-dark font-14 bi bi-circle"></i>
+                </div>
+            </div>
+            <a href="#" data-bs-dismiss="offcanvas" class="mx-3 btn btn-full gradient-blue shadow-bg shadow-bg-s">Request
+                Funds</a>
+        </div>
+    </div>
+    <div id="menu-bill" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:350px;">
+            <div class="d-flex mx-3 mt-3 py-1">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Pay a Bill</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="ps-4 shadow-0 me-n2" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26 line-height-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-3 mb-2"></div>
+            <div class="content mt-0">
+                <div class="d-flex">
+                    <h5 class="mb-0 font-600 font-14">From</h5>
+                    <h5 class="mb-0 ms-auto font-600 font-14">Cool-Co LTD</h5>
+                </div>
+                <div class="divider my-2"></div>
+                <div class="d-flex">
+                    <h5 class="mb-0 font-600 font-14">Period</h5>
+                    <h5 class="mb-0 ms-auto font-600 font-14">1st to 30th June</h5>
+                </div>
+                <div class="divider my-2"></div>
+                <div class="d-flex">
+                    <h5 class="mb-0 font-600 font-14">Invoice</h5>
+                    <h5 class="mb-0 ms-auto font-600 font-14">ID-315613</h5>
+                </div>
+                <div class="divider my-2"></div>
+                <div class="d-flex">
+                    <h5 class="mb-0 font-600 font-14">Amount</h5>
+                    <h5 class="mb-0 ms-auto font-700 font-14 color-blue-dark">$145 USD</h5>
+                </div>
+                <div class="divider my-2"></div>
+                <div class="d-flex">
+                    <h5 class="mb-0 font-600 font-14">Bill Status</h5>
+                    <h5 class="mb-0 ms-auto font-700 font-14 color-red-dark">Overdue</h5>
+                </div>
+                <div class="divider my-2"></div>
+            </div>
+            <a href="#" data-bs-dismiss="offcanvas" class="mx-3 btn btn-full gradient-blue shadow-bg shadow-bg-s">Tap to Pay -
+                145 USD</a>
+        </div>
+    </div>
+    <div id="menu-card-more" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        
+    </div>
+    <div id="menu-friends-transfer" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+    </div> -->
+
+    <!-- <div id="menu-exchange" class="offcanvas offcanvas-bottom offcanvas-detached rounded-m">
+        <div class="menu-size" style="height:260px;">
+            <div class="d-flex mx-3 mt-3 py-1">
+                <div class="align-self-center">
+                    <h1 class="mb-0">Exchange</h1>
+                </div>
+                <div class="align-self-center ms-auto">
+                    <a href="#" class="ps-4 shadow-0 me-n2" data-bs-dismiss="offcanvas">
+                        <i class="bi bi-x color-red-dark font-26 line-height-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-3"></div>
+            <div class="content mt-0">
+                <div class="row mt-n3">
+                    <div class="col-5">
+                        <div class="form-custom form-label form-border">
+                            <select class="form-select color-blue-dark exchange-select rounded-xs border-0" id="cura">
+                                <option *ngFor="let item of transaction; index as i;" value="0" selected="">{{item.name}} {{(item.wallet*1).toFixed(4)}}</option>
+                            </select>
+                        </div>
+                        <div class="form-custom form-label form-border">
+                            <div class="form-custom form-label">
+                                <input type="number" class="form-control exchange-value border-0 rounded-xs" id="val1a"
+                                    placeholder="50.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <h5 class="exchange-arrow"><i class="bi bi-arrow-left-right"></i></h5>
+                    </div>
+                    <div class="col-5">
+                        <div class="form-custom form-label form-border">
+                            <select class="form-select color-blue-dark exchange-select rounded-xs border-0" id="curb">
+                                <option value="0" selected="">EUR</option>
+                                <option value="1">USD</option>
+                                <option value="2">BTC</option>
+                                <option value="3">ETH</option>
+                            </select>
+                        </div>
+                        <div class="form-custom form-label form-border">
+                            <div class="form-custom form-label">
+                                <input type="number" class="form-control exchange-value border-0 rounded-xs" id="val2a"
+                                    placeholder="43.35">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" data-bs-dismiss="offcanvas" class="mx-3 btn btn-full gradient-red shadow-bg shadow-bg-s">Convert and Add
+                to Account</a>
+        </div>
+    </div> -->
+    
+    <div *ngIf="user!=null" id="menu-information" class="offcanvas offcanvas-start">
+        <div style="width:100vw">
+            <div class="pt-3">
+                <div class="page-title d-flex">
+                    <div class="align-self-center">
+                        <a data-bs-dismiss="offcanvas"
+                            class="me-3 ms-0 icon icon-xxs bg-theme rounded-s shadow-m">
+                            <i class="bi bi-chevron-left color-theme font-14"></i>
+                        </a>
+                    </div>
+                    <div class="align-self-center me-auto">
+                        <h1 class="color-theme mb-0 font-18">Back to Profile</h1>
+                    </div>
+                    <!-- <div class="align-self-center ms-auto">
+                        <a 
+                            class="icon icon-xxs gradient-highlight color-white shadow-bg shadow-bg-xs rounded-s">
+                            <i class="bi bi-list font-20"></i>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="content mt-0">
+                <h5 class="pb-3 pt-4">Personal Information</h5>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="text" class="form-control rounded-xs" id="c1a" [(ngModel)]="user.userid" placeholder="2343242343284" readonly />
+                    <label for="c1a" class="form-label-always-active color-highlight">User id</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="text" class="form-control rounded-xs" id="c1ab" [(ngModel)]="user.name" placeholder="John" />
+                    <label for="c1ab" class="form-label-always-active color-highlight">First Name</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="email" readonly class="form-control rounded-xs" id="c1" [(ngModel)]="user.email" placeholder="name@domain.com" />
+                    <label for="c1" class="color-highlight form-label-always-active">Email Address</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="text" class="form-control rounded-xs" id="c1abcd" [(ngModel)]="user.address" placeholder="Enter address"/>
+                    <label for="c1abcd" class="form-label-always-active color-highlight">Address</label>
+                    <span>(required)</span>
+                </div>
+                <h5 class="pb-3 pt-4">Default Settings</h5>
+                <div class="form-custom form-label form-border form-icon">
+                    <i class="bi bi-calendar font-13"></i>
+                    <label for="c6a" class="color-highlight form-label-always-active">Default Account</label>
+                    <select class="form-select rounded-xs" id="c6a" disabled>
+                        <option value="0" selected>Main Account</option>
+                        <option value="01">Savings Account</option>
+                        <option value="02">Company Account</option>
+                    </select>
+                </div>
+                <h5 class="pb-3 pt-4">Account Security</h5>
+                <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="tel" readonly class="form-control rounded-xs" id="c21" [(ngModel)]="user.contact" />
+                    <label for="c21" class="color-highlight form-label-always-active">Phone Number</label>
+                    <span>(required)</span>
+                </div>
+                <!-- <div class="form-custom form-label form-border mb-3 bg-transparent">
+                    <input type="password" class="form-control rounded-xs" id="c2" placeholder="Old Password"/>
+                    <label for="c2" class="color-highlight form-label-always-active">Current Password</label>
+                    <span>(required)</span>
+                </div>
+                <div class="form-custom form-label form-border mb-4 bg-transparent">
+                    <input type="password" class="form-control rounded-xs" id="c3" placeholder="New Password"/>
+                    <label for="c3" class="color-highlight form-label-always-active">New Password</label>
+                    <span>(required)</span>
+                </div> -->
+                <a (click)="updateProfile()"  class="btn btn-full gradient-highlight shadow-bg shadow-bg-s mt-4">Update Profile</a>
+                <div #closebtn data-bs-dismiss="offcanvas"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="profile">
+        <div class="coverpop"></div>
+        <div class="orprofile">
+            <div class="card card-style mb-3 mx-0">
+                <div class="content pb-0" [formGroup]="updateUser">
+                    <div class="d-flex mx-3 py-1">
+                        <div class="align-self-center">
+                            <h1>Update Profile</h1>
+                        </div>
+                    </div>
+                    <div class="divider divider-margins mt-1"></div>
+                    <div class="content mt-0">
+                        <div class="form-custom form-label form-icon">
+                            <i class="bi bi-flag font-14"></i>
+                            <select class="form-select rounded-xs" (change)="selectCuntry($event)" [(ngModel)]="user.cuntry" formControlName="cuntry" id="c6" aria-label="Floating label select example">
+                                <option selected="" value="">Country</option>
+                                <option *ngFor="let item of cuntryList; index as i;" [value]="i">{{item.country_name}}</option>
+                            </select>
+                            <label for="c6" class="form-label-always-active color-highlight font-11">Select Country</label>
+                        </div>
+                        <div class="pb-3"></div>
+                        <div class="form-custom form-label form-icon">
+                            <i class="bi bi-phone font-14"></i>
+                            <input type="text" (keypress)="orgnigation.numberOnly($event)" [readonly]="redContact" [(ngModel)]="user.contact" formControlName="contact" class="form-control rounded-xs" id="c4">
+                            <label for="c4" class="form-label-always-active color-highlight font-11">Contact Number</label>
+                            <span class="font-10">{{cuntrycode}}</span>
+                        </div>
+                        <div class="pb-3"></div>
+                        <div class="form-custom form-label form-icon">
+                            <i class="bi bi-envelope font-14"></i>
+                            <input type="text" [readonly]="redEmail" [(ngModel)]="user.email" formControlName="email" class="form-control rounded-xs" id="c3" placeholder="Enter Email">
+                            <label for="c3" class="form-label-always-active color-highlight font-11">Email-Id</label>
+                            <span class="font-10">(required)</span>
+                        </div>
+                        <div class="pb-3"></div>
+                        <div class="form-custom form-label form-icon">
+                            <i class="bi bi-person font-14"></i>
+                            <input type="text" [readonly]="redName" [(ngModel)]="user.name" formControlName="name" class="form-control rounded-xs" id="c3" placeholder="Your Name">
+                            <label for="c3" class="form-label-always-active color-highlight font-11">Your Name</label>
+                            <span class="font-10">(required)</span>
+                        </div>
+                    </div>
+                    <span (click)="submit()" class="mx-3 mb-3 btn btn-full gradient-green shadow-bg shadow-bg-s">
+                        <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                        <span *ngIf="!loading">Update</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

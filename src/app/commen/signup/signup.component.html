@@ -1,0 +1,18 @@
+<div class="loginBody">
+    <div class="logo">
+        <img width="70px" src="assets/images/logo.png" alt="">
+        MAKDFS
+    </div>
+    <div class="inputarea" [formGroup]="updateUser">
+        <input type="text" formControlName="email" class="text-start" placeholder="Email Id">
+        <input type="text" formControlName="contact" class="mt-2 text-start" placeholder="Contact Number">
+        <input type="text" formControlName="name" class="mt-2 text-start" placeholder="Name">
+        <input type="password" formControlName="password" class="mt-2 text-start" placeholder="Password">
+        <input type="password" formControlName="conpass" class="mt-2 text-start" placeholder="Conform Password">
+        <button (click)="signup()" class="mb-3">
+            <img *ngIf="loader2" class="loading" src="assets/images/ar1.gif" alt="preloader">
+            <span *ngIf="loader2==false">SignUp</span>                    
+        </button>
+        <a routerLink="/refure{{refurl}}">Already have an account! Login</a>
+    </div>
+</div>

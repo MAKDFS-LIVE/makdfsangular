@@ -1,0 +1,27 @@
+<div class="content pb-0">
+
+    <div class="iq-blog-box">
+        <div class="iq-blog-image clearfix">
+            <img class="img-fluid center-block" src="{{item.images}}" alt="{{item.blogTitle}}">
+        </div>
+        <div class="iq-blog-detail p-3">
+            <div class="blog-title"> 
+                <a href="/blog/{{item.url}}">
+                    <h5 class="iq-tw-7 iq-mb-10">{{item.blogTitle}}</h5>
+                </a> 
+            </div>
+            <div class="blog-content">
+                <p>{{orgnigation.trimLenthDot(item.shortDescription,120)}}</p>
+            </div>
+            <div class="iq-blog-meta">
+                <ul class="list-inline">
+                    <li class="list-inline-item"><i class="fa fa-calendar" aria-hidden="true"></i> {{item.date | date:'dd MMM yyyy'}}</li>
+                </ul>
+            </div>
+            <div class="blog-content" [innerHtml]="item.description">
+                
+            </div>
+        </div>
+    </div>
+
+</div>

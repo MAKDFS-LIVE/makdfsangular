@@ -1,0 +1,79 @@
+<div class="px-3">
+    <div class="splide__slide">
+        <div class="card card-style m-0 bg-9 shadow-card shadow-card-m" style="height:200px">
+            <div class="card-center">
+                <div class="bg-theme px-3 py-2 rounded-end d-inline-block">
+                    <h1 class="font-13 my-n1">
+                        <span class="color-theme">MAK Balance</span>
+                    </h1>
+                    <div class="collapse show">
+                        <h2 class="color-theme font-26">${{openWallet.toFixed(2)}}</h2>
+                    </div>
+                </div>
+            </div>
+            <strong class="card-top no-click font-12 p-3 color-white font-monospace">MAK Account</strong>
+            <strong class="card-bottom no-click p-3 text-start color-white font-monospace">Wallet ID: {{user.userid}}</strong>
+            <div class="card-overlay bg-black opacity-50"></div>
+        </div>
+    </div>
+</div>
+<div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2">
+        <span (click)="ptptrad()" routerLink="/buy/crypto" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Add money in wallet
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Using P to P
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<div class="card card-style" >
+    <div class="content">
+        <div class="collapse show" *ngIf="nodata.length==0">
+            <div class="d-flex" *ngIf="!loging">
+                <div>
+                    <span class="icon">
+                        <img src="{{transaction.icon}}" width="25" class="rounded-s" alt="img">
+                    </span>
+                </div>
+                <div class="ps-1">
+                    <h1 class="font-14 mb-n1">{{transaction.curency}}</h1>
+                    <h5 class="font-10 font-400 opacity-70 mb-n1">{{transaction.name}}</h5>
+                </div>
+                <div class="ms-auto pt-1">
+                    <span class="rounded-l font-500 font-12 d-block text-end color-green-dark" >${{(openWallet*1).toFixed(4)}}</span>
+                    <h1 class="mb-0 mt-n2 font-16 text-end">{{(transaction.wallet*1).toFixed(4)}}</h1>
+                </div>
+            </div>
+            
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+        </div>
+        <div class="collapse show text-center" *ngIf="nodata.length>0">
+            Please buy MAK and grow your money.
+        </div>
+    </div>
+</div>
+
+<div *ngIf="nodata.length==0" class="card card-style gradient-green rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content">
+        <div (click)="invest()" class="text-center">
+            <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                Invest Now
+            </h5>
+        </div>
+    </div>
+</div>

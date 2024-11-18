@@ -1,0 +1,60 @@
+
+<div class="card card-style gradient-red rounded-s shadow-bg shadow-bg-xs mb-3 mt-3">
+    <div class="content my-2">
+        <span (click)="removeAccount()" routerLink="/p2p/add-account" class="d-flex">
+            <div class="align-self-center">
+                <h1 class="mb-0 font-14"><i class="bi bi-credit-card color-white pe-3"></i></h1>
+            </div>
+            <div class="align-self-center">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    Add a payment method
+                </h5>
+            </div>
+            <div class="align-self-center ms-auto">
+                <h5 class="color-white font-600 mb-0 mt-0 font-14 line-height-s">
+                    <i class="bi bi-plus-circle color-white pe-3"></i>
+                </h5>
+            </div>
+        </span>
+    </div>
+</div>
+
+<div class="card card-style">
+    <div class="content">
+        <div class="collapse show" id="tab-5" data-bs-parent="#tab-group-2">
+            <div *ngFor="let item of account; index as i;">
+                <div class="d-flex py-1">
+                    <div class="align-self-center ps-1">
+                        <h4 class="pt-1 mb-n1 color-red-dark">{{item.paymentType}}</h4>
+                        <h6 class="mt-2 font-15">{{item.name}}</h6>
+                        <div *ngIf="item.paymentType=='IMPS'">
+                            <p class="mb-0 font-15">{{item.accountNo}} </p>
+                            <p class="mb-0 font-12 opacity-70">{{item.ifsc}}</p>
+                            <p class="mb-0 font-12 opacity-70">{{item.bankName}}</p>
+                            <p class="mb-0 font-12 opacity-70">{{item.baranchName}}</p>
+                        </div>
+                        <div *ngIf="item.paymentType=='Paytm'">
+                            <p class="mb-0 font-15">{{item.paytmNo}}</p>
+                            <i *ngIf="item.qrcode!=''" class="bi bi-qr-code"></i>
+                        </div>
+                        <div *ngIf="item.paymentType=='UPI'">
+                            <p class="mb-0 font-15">{{item.upiid}}</p>
+                            <i *ngIf="item.qrcode!=''" class="bi bi-qr-code"></i>
+                        </div>
+                    </div>
+                    <div class="align-self-center ms-auto text-end">
+                        <i (click)="update(i)" routerLink="/p2p/add-account" class="bi bi-pencil-square text-success"></i><br>
+                        <i (click)="delete(item.id)" class="bi bi-trash text-danger"></i>
+                    </div>
+                </div>
+                <div class="divider my-2 opacity-50"></div>
+            </div>
+            <div *ngIf="loging" class="py-5">
+                <div class="text-center ptb-50">
+                    <img src="/assets/images/ar1.gif" alt="aeromus.com"/>
+                </div>
+            </div>
+            <div *ngIf="nodata.length>0" class="py-5 text-center">No any payment method added at this time, You can add new payment method</div>
+        </div> 
+    </div>
+</div>

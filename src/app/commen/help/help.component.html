@@ -1,0 +1,47 @@
+<div class="card card-style mt-3">
+    <div class="content pb-0" [formGroup]="updateUser">
+        <div class="d-flex mx-3 py-1">
+            <div class="align-self-center">
+                <h1>Help</h1>
+            </div>
+        </div>
+        <div class="divider divider-margins mt-1"></div>
+        <div class="content mt-0">
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-phone font-14"></i>
+                <input type="text" readonly [(ngModel)]="user.contact" formControlName="contact" class="form-control rounded-xs" id="c4">
+                <label for="c4" class="form-label-always-active color-highlight font-11">Contact Number</label>
+            </div>
+            <div class="pb-3"></div>
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-envelope font-14"></i>
+                <input type="text" readonly [(ngModel)]="user.email" formControlName="email" class="form-control rounded-xs" id="c3" placeholder="Enter Email">
+                <label for="c3" class="form-label-always-active color-highlight font-11">Email-Id</label>
+                <span class="font-10">(required)</span>
+            </div>
+            <div class="pb-3"></div>
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-person font-14"></i>
+                <input type="text" readonly [(ngModel)]="user.name" formControlName="name" class="form-control rounded-xs" id="c3" placeholder="Your Name">
+                <label for="c3" class="form-label-always-active color-highlight font-11">Your Name</label>
+                <span class="font-10">(required)</span>
+            </div>
+            <div class="pb-3"></div>
+            <div class="form-custom form-label form-icon">
+                <i class="bi bi-person font-14"></i>
+                <textarea formControlName="query" class="form-control rounded-xs" style="min-height: 100px;"></textarea>
+                <label for="c3" class="form-label-always-active color-highlight font-11">Query</label>
+                <span class="font-10">(required)</span>
+            </div>
+            <div class="pb-3"></div>
+            <div class="form-custom form-label form-icon orde">
+                <input formControlName="image" class="form-control rounded-xs" type="file">
+                <label class="form-label-always-active color-highlight font-11">File</label>
+            </div>
+        </div>
+        <span (click)="submit()" class="mx-3 mb-3 btn btn-full gradient-green shadow-bg shadow-bg-s">
+            <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+            <span *ngIf="!loading">Submit Query</span>
+        </span>
+    </div>
+</div>

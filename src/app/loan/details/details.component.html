@@ -1,0 +1,72 @@
+<!-- 
+
+<div class="card card-style">
+    <div class="content my-4">
+        <h5>Loan Details</h5>
+        <table class="w-100">
+            <tr>
+                <th style="width: 150px;">Alloted Amount</th>
+                <td>${{intrest.usdtAmnt.toFixed(4)}}</td>
+            </tr>
+            <tr>
+                <th>{{intrest.curency}} Amount</th>
+                <td>{{intrest.localCurency.toFixed(4)}}</td>
+            </tr>
+            <tr>
+                <th>Interest Rate</th>
+                <td>{{intrest.interestRate}}%</td>
+            </tr>
+            <tr>
+                <th>Processing fee</th>
+                <td>{{intrest.processingfee}}%</td>
+            </tr>
+            <tr>
+                <th>Sequrity</th>
+                <td>{{intrest.sequrity}}%</td>
+            </tr>
+            <tr>
+                <th>Preening fee</th>
+                <td>{{intrest.preening}}%</td>
+            </tr>
+        </table>
+        <h5 class="mt-1">Select tenure</h5>
+        <div class="row mt-2">
+            <div class="col-4">
+                <div class="orweek"><strong>Week</strong></div>                    
+            </div>
+            <div class="col-7">
+                <div class="quantity size-2">
+                    <input type="text" [value]="weeks" readonly="">
+                    <button type="button" (click)="plush(1)" class="qty-plus"><i class="bi bi-plus"></i></button>
+                    <button type="button" (click)="plush(-1)" class="qty-minus"><i class="bi bi-dash"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="w-100 mt-1">
+            <tr>
+                <th style="width: 150px;">Total Interest</th>
+                <td>{{weeks* (intrest.intrest/48)}}%</td>
+            </tr>
+            <tr>
+                <th>Creditable USD</th>
+                <td>${{creditable.toFixed(4)}} = {{(creditable / makVaue).toFixed(2)}} MAK</td>
+            </tr>
+            <tr class="text-success">
+                <th>Payable USD</th>
+                <td>${{(paybleusdt).toFixed(4)}} = {{(paybleusdt / makVaue).toFixed(2)}} MAK</td>
+            </tr>
+        </table>
+        <hr>
+        <div class="row mt-2">
+            <div class="col-6">
+                <span routerLink="/wallet/open" class="btn btn-full gradient-highlight rounded-s shadow-bg shadow-bg-s">Cancel</span>
+            </div>
+            <div class="col-6">
+                <span (click)="conformLoan()" class="btn btn-full gradient-green rounded-s shadow-bg shadow-bg-s">
+                    <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                    <span *ngIf="!loading">Confirm</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div> -->

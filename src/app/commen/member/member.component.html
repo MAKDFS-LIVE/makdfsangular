@@ -1,0 +1,110 @@
+<div class="p-3">
+    <div *ngIf="reg" class="card card-style mb-3 mx-0">
+        <div class="content pb-0" [formGroup]="updateUser">
+            <div class="d-flex mx-3 py-1">
+                <div class="align-self-center">
+                    <h3>Application for Employment</h3>
+                </div>
+            </div>
+            <div class="divider divider-margins mt-1"></div>
+            <div class="content mt-0">
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-phone font-14"></i>
+                    <input type="text" (keypress)="orgnigation.numberOnly($event)" [readonly]="true" [(ngModel)]="user.contact" formControlName="contact" class="form-control rounded-xs">
+                    <label for="c4" class="form-label-always-active color-highlight font-11">Contact Number</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-envelope font-14"></i>
+                    <input type="text" [readonly]="true" [(ngModel)]="user.email" formControlName="email" class="form-control rounded-xs" placeholder="Enter Email">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Email-Id</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-person font-14"></i>
+                    <input type="text" [readonly]="true" [(ngModel)]="user.name" formControlName="name" class="form-control rounded-xs" placeholder="Your Name">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Your Name</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-building font-14"></i>
+                    <input type="text" [(ngModel)]="user.address" formControlName="address" class="form-control rounded-xs" placeholder="Your Address">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Address</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-building font-14"></i>
+                    <input type="text" [(ngModel)]="user.city" formControlName="city" class="form-control rounded-xs" placeholder="City">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">City</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-building font-14"></i>
+                    <input type="text" [(ngModel)]="user.pin" formControlName="pin" maxlength="6" class="form-control rounded-xs" placeholder="Pin">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Pin</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-building font-14"></i>
+                    <input type="text" [(ngModel)]="user.state" formControlName="state" class="form-control rounded-xs" placeholder="State">
+                    <label class="form-label-always-active color-highlight font-11">State</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <i class="bi bi-flag font-14"></i>
+                    <select class="form-select rounded-xs" [(ngModel)]="user.education" formControlName="education" id="c6">
+                        <option selected="" value="">Select Education</option>
+                        <option>Intermediate</option>
+                        <option>Graduate</option>
+                        <option>Post Graduate</option>
+                    </select>
+                    <label for="c6" class="form-label-always-active color-highlight font-11">Select Education</label>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <input type="file" (change)="onselectfile($event)" formControlName="resume" accept=".pdf" capture="file" class="form-control rounded-xs form-control-sm pt-15" placeholder="Resume">
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Resume</label>
+                    <span class="font-10">(required)</span>
+                </div>
+                <div class="pb-3"></div>
+                <div class="form-custom form-label form-icon">
+                    <div class="row">
+                        <div class="col">
+                            <input type="file" (change)="onselectfile($event)" formControlName="resume" accept=".pdf" capture="file" class="form-control rounded-xs form-control-sm pt-15" placeholder="Resume">
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
+                    
+                    <label for="c3" class="form-label-always-active color-highlight font-11">Pan Card</label>
+                    <span class="font-10">(required)</span>
+                </div>
+            </div>
+            <span (click)="submit()" class="mx-3 mb-3 btn btn-full gradient-green shadow-bg shadow-bg-s">
+                <label *ngIf="loading"><img class="dup" src="assets/images/ar1.gif"/></label>
+                <span *ngIf="!loading">Apply Now</span>
+            </span>
+        </div>
+    </div>
+
+    <div *ngIf!="reg" class="card card-style mb-3 mx-0">
+        <div class="content pb-0" [formGroup]="updateUser">
+            <div class="d-flex mx-3 py-1">
+                <div class="align-self-center text-center">
+                    <h3 class="text-success">We have successfully received your application.</h3>
+                    <p class="mt-4">We will schedule your interview shortly.</p>
+                    <p>The details of your interview will be sent to your email.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
